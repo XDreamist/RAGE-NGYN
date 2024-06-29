@@ -1,0 +1,14 @@
+
+<RCC>
+<qresource>
+<file>ADTOR.qmlproject</file>
+<file>ADTOR/Constants.qml</file>
+<file>ADTOR/DirectoryFontLoader.qml</file>
+<file>ADTOR/EventListModel.qml</file>
+<file>ADTOR/EventListSimulator.qml</file>
+<file>ADTOR/qmldir</file>
+<file>ADTORContent/App.qml</file>
+<file>ADTORContent/Screen01.ui.qml</file>
+<file>qtquickcontrols2.conf</file>
+</qresource>
+</RCC>
