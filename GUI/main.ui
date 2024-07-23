@@ -25,16 +25,21 @@ color: #1e1e1e;
 }</string>
   </property>
   <widget class="QWidget" name="CentralWidget">
+   <property name="styleSheet">
+    <string notr="true">#CentralWidget {
+	background-color: #1e1e1e;
+}</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="0">
      <widget class="QWidget" name="ContentContainer" native="true">
       <widget class="QWidget" name="widget_2" native="true">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>882</width>
-         <height>240</height>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>30</height>
         </rect>
        </property>
       </widget>
@@ -43,7 +48,7 @@ color: #1e1e1e;
     <item row="0" column="0">
      <widget class="QWidget" name="MenubarContainer" native="true">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -57,6 +62,84 @@ color: #1e1e1e;
       <property name="cursor">
        <cursorShape>SizeAllCursor</cursorShape>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="LogoContainer" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="TitleContainer" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="ControlContainer" native="true">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" alignment="Qt::AlignRight">
+           <widget class="QFrame" name="ControlFrame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="CloseButton">
+               <property name="text">
+                <string>Close</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>

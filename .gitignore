@@ -1,2 +1,7 @@
 
 /GUI/venv
+/RAGE/x64
+/dep
+/.vs
+/GUI/__pycache__
+/RAGE/.vs
