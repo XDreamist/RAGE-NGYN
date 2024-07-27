@@ -1,0 +1,112 @@
+#include "pch.h"            // Precompiled header, if used
+#include "GLRenderer.h"     // Header file for GLRenderer class
+
+#include <GLFW/glfw3.h>     // GLFW header for window and OpenGL context management
+#include <iostream>         // For standard input/output
+
+GLRenderer::GLRenderer()
+{
+    // Initialize GLFW
+    if (!glfwInit())
+    {
+        fprintf(stderr, "Failed to initialize GLFW\n");
+        return;
+    }
+
+    // Create a windowed mode window and its OpenGL context
+    window = glfwCreateWindow(800, 600, "OpenGL Cube", NULL, NULL);
+    if (!window)
+    {
+        fprintf(stderr, "Failed to create GLFW window\n");
+        glfwTerminate();
+        return;
+    }
+
+    // Make the window's context current
+    glfwMakeContextCurrent(window);
+
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+
+    // Set clear color to black
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
+GLRenderer::~GLRenderer()
+{
+    // No explicit cleanup needed here for GLFWwindow since CleanUp() handles it
+}
+
+void GLRenderer::ChangeRenderView(const char* view)
+{
+    // Placeholder method for changing render view, can be implemented as needed
+}
+
+void GLRenderer::CleanUp()
+{
+    glfwDestroyWindow(window);
+    glfwTerminate();
+}
+
+void GLRenderer::RenderCube()
+{
+    // Loop until the user closes the window
+    while (!glfwWindowShouldClose(window))
+    {
+        // Clear the framebuffer
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Render the cube
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        glTranslatef(0.0f, 0.0f, -5.0f);
+        glRotatef(angle, 1.0f, 1.0f, 1.0f);
+
+        glBegin(GL_TRIANGLES);
+        // Front face
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(-1.0f, -1.0f, 1.0f);
+        glVertex3f(1.0f, -1.0f, 1.0f);
+        glVertex3f(1.0f, 1.0f, 1.0f);
+        glVertex3f(-1.0f, 1.0f, 1.0f);
+        // Back face
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex3f(-1.0f, -1.0f, -1.0f);
+        glVertex3f(-1.0f, 1.0f, -1.0f);
+        glVertex3f(1.0f, 1.0f, -1.0f);
+        glVertex3f(1.0f, -1.0f, -1.0f);
+        // Top face
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex3f(-1.0f, 1.0f, -1.0f);
+        glVertex3f(-1.0f, 1.0f, 1.0f);
+        glVertex3f(1.0f, 1.0f, 1.0f);
+        glVertex3f(1.0f, 1.0f, -1.0f);
+        // Bottom face
+        glColor3f(1.0f, 1.0f, 0.0f);
+        glVertex3f(-1.0f, -1.0f, -1.0f);
+        glVertex3f(1.0f, -1.0f, -1.0f);
+        glVertex3f(1.0f, -1.0f, 1.0f);
+        glVertex3f(-1.0f, -1.0f, 1.0f);
+        // Right face
+        glColor3f(1.0f, 0.0f, 1.0f);
+        glVertex3f(1.0f, -1.0f, -1.0f);
+        glVertex3f(1.0f, 1.0f, -1.0f);
+        glVertex3f(1.0f, 1.0f, 1.0f);
+        glVertex3f(1.0f, -1.0f, 1.0f);
+        // Left face
+        glColor3f(0.0f, 1.0f, 1.0f);
+        glVertex3f(-1.0f, -1.0f, -1.0f);
+        glVertex3f(-1.0f, -1.0f, 1.0f);
+        glVertex3f(-1.0f, 1.0f, 1.0f);
+        glVertex3f(-1.0f, 1.0f, -1.0f);
+        glEnd();
+
+        // Swap front and back buffers
+        glfwSwapBuffers(window);
+
+        // Poll for and process events
+        glfwPollEvents();
+
+        angle += 0.5f; // Increment rotation angle
+    }
+}

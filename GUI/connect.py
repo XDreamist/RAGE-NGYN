@@ -14,7 +14,4 @@ dll_path = os.path.join(script_dir, dll_filename)
 dll = ctypes.CDLL(dll_path)
 
 # Example: Call a function from the DLL
-dll.printHello()
 dll.InitOpenGL()
-dll.RenderCube()
-dll.Cleanup()
