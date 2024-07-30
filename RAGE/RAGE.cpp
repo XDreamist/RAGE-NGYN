@@ -5,10 +5,25 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <fstream>
-#include <sstream>
 #include <cmath>
 
+
+const char* vertexShaderSource = R"(
+#version 330 core
+layout (location = 0) in vec3 aPos;
+uniform mat4 model;
+void main() {
+    gl_Position = model * vec4(aPos, 1.0);
+}
+)";
+
+const char* fragmentShaderSource = R"(
+#version 330 core
+out vec4 FragColor;
+void main() {
+    FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red color
+}
+)";
 
 // Initialize OpenGL and create window
 //extern "C" __declspec(dllexport) void InitOpenGL()
@@ -21,17 +36,9 @@
 //}
 
 // Shader loading utility functions
-static std::string LoadShaderSource(const std::string& filePath) {
-    std::ifstream file(filePath);
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-}
-
-static GLuint CompileShader(GLenum type, const std::string& source) {
+static GLuint CompileShader(GLenum type, const char* source) {
     GLuint shader = glCreateShader(type);
-    const char* src = source.c_str();
-    glShaderSource(shader, 1, &src, NULL);
+    glShaderSource(shader, 1, &source, NULL);
     glCompileShader(shader);
 
     // Check for compile errors
@@ -47,7 +54,7 @@ static GLuint CompileShader(GLenum type, const std::string& source) {
     return shader;
 }
 
-static GLuint CreateShaderProgram(const std::string& vertexSource, const std::string& fragmentSource) {
+static GLuint CreateShaderProgram(const char* vertexSource, const char* fragmentSource) {
     GLuint vertexShader = CompileShader(GL_VERTEX_SHADER, vertexSource);
     GLuint fragmentShader = CompileShader(GL_FRAGMENT_SHADER, fragmentSource);
 
@@ -74,14 +81,16 @@ static GLuint CreateShaderProgram(const std::string& vertexSource, const std::st
 }
 
 static void MultiplyMatrix(float* result, const float* m1, const float* m2) {
+    float temp[16]{};
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            result[i * 4 + j] = 0.0f;
+            temp[i * 4 + j] = 0.0f;
             for (int k = 0; k < 4; ++k) {
-                result[i * 4 + j] += m1[i * 4 + k] * m2[k * 4 + j];
+                temp[i * 4 + j] += m1[i * 4 + k] * m2[k * 4 + j];
             }
         }
     }
+    std::copy(std::begin(temp), std::end(temp), result);
 }
 
 // Create a rotation matrix
@@ -120,8 +129,11 @@ extern "C" __declspec(dllexport) void InitOpenGL()
         return;
     }
 
+    // Set GLFW error callback
+    //glfwSetErrorCallback(glfwErrorCallback);
+
     // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Rendering", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1200, 600, "OpenGL Rendering", NULL, NULL);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -135,6 +147,13 @@ extern "C" __declspec(dllexport) void InitOpenGL()
         std::cerr << "Failed to initialize GLEW" << std::endl;
         return;
     }
+
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+
+    glViewport(0, 0, 800, 600);
+
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
     // Define vertices for a cube
     float vertices[] = {
@@ -179,19 +198,22 @@ extern "C" __declspec(dllexport) void InitOpenGL()
     glBindVertexArray(0);
 
     // Compile shaders
-    std::string vertexSource = LoadShaderSource("vertex_shader.glsl");
-    std::string fragmentSource = LoadShaderSource("fragment_shader.glsl");
-    GLuint shaderProgram = CreateShaderProgram(vertexSource, fragmentSource);
+    GLuint shaderProgram = CreateShaderProgram(vertexShaderSource, fragmentShaderSource);
 
     // Set up transformation
-    float model[16] = { 1.0f };
+    float model[16] = {
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    };
     float rotationMatrix[16];
     float angle = 0.0f;
 
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         // Update rotation
-        angle += 0.01f; // Increment angle
+        angle = 0.01f; // Increment angle
         CreateRotationMatrix(rotationMatrix, angle, 0.5f, 1.0f, 0.0f);
         MultiplyMatrix(model, rotationMatrix, model);
 
@@ -216,10 +238,9 @@ extern "C" __declspec(dllexport) void InitOpenGL()
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
     glDeleteProgram(shaderProgram);
+
     glfwDestroyWindow(window);
     glfwTerminate();
-
-    return;
 }
 
 static void glfwErrorCallback(int error, const char* description) 
