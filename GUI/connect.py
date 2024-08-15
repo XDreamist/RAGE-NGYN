@@ -15,3 +15,5 @@ dll = ctypes.CDLL(dll_path)
 
 # Example: Call a function from the DLL
 dll.InitOpenGL()
+
+dll.RenderCube()
