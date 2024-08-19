@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "GLRenderer.h"
+#include "Renderer/GLRenderer.h"
 
 #include <iostream>
 #include "RAGE.h"
@@ -18,10 +18,10 @@ extern "C" __declspec(dllexport) void InitOpenGL()
 
 extern "C" __declspec(dllexport) void RenderCube()
 {
-    renderer.RenderCube();
-    renderer.CleanUp();
+    renderer.Render();
 }
 
-void Cleanup()
+extern "C" __declspec(dllexport) void Cleanup()
 {
+    //renderer.CleanUp();
 }
