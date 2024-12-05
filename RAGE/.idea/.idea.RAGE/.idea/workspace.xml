@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3e5ac9c1-0984-4786-be61-4e1552e4ca73" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../GUI/glew32.lib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RAGE/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RAGE/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseObj.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseObj.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Object.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Object.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.sln" beforeDir="false" afterPath="$PROJECT_DIR$/RAGE.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.vcxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.vcxproj.filters" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAGE.vcxproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Renderer/GLRenderer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Renderer/GLRenderer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dllmain.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pch.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pch.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dep.zip" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2ns4Gh88DuTWBVYrj14eKytOa7y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e5ac9c1-0984-4786-be61-4e1552e4ca73" name="Changes" comment="" />
+      <created>1729748358792</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729748358792</updated>
+      <workItem from="1729748361697" duration="17000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
