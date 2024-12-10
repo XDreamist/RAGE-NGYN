@@ -10,8 +10,6 @@ public:
 
     ~MainWindow();
 
-    //void addFunctions();
-
 private:
     bool openRage = false;
     class Ui_RAGE* ui_Rage = nullptr;

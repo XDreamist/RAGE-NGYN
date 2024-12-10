@@ -106,6 +106,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="QtCustom\QSearchBar.cpp" />
+    <ClCompile Include="QtCustom\QSearchList.cpp" />
     <ClCompile Include="System\ConfigManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -113,6 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QtCustom\QSearchBar.h" />
+    <ClInclude Include="QtCustom\QSearchList.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="System\ConfigManager.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="UI_Main.h" />
@@ -120,9 +123,16 @@
     <ClInclude Include="UI_SearchBar.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ui\Resources\Base.qrc" />
     <None Include="ui\UI_Main.ui" />
     <None Include="ui\UI_ProjectSelection.ui" />
     <None Include="ui\update_ui.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ADTOR.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\bin\res\Logo\favicon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,9 @@ public:
         if (SearchBarBackground->objectName().isEmpty())
             SearchBarBackground->setObjectName("SearchBarBackground");
         SearchBarBackground->resize(402, 215);
+        SearchBarBackground->setStyleSheet(QString::fromUtf8("#SearchBarBackground {\n"
+"	background-color: #222222;\n"
+"}"));
         SearchBarBackground->setFrameShape(QFrame::StyledPanel);
         SearchBarBackground->setFrameShadow(QFrame::Plain);
         SBLayout = new QGridLayout(SearchBarBackground);
@@ -69,8 +72,15 @@ public:
         listView->setStyleSheet(QString::fromUtf8("#listView {\n"
 "	color: #D3D3D3;\n"
 "	background-color: #222222;\n"
+"	border: 1px solid #D3D3D3;\n"
 "}"));
+        listView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        listView->setProperty("isWrapping", QVariant(true));
+        listView->setSpacing(1);
+        listView->setUniformItemSizes(true);
+        listView->setBatchSize(88);
+        listView->setWordWrap(true);
 
         gridLayout->addWidget(listView, 0, 0, 1, 1);
 
@@ -87,6 +97,7 @@ public:
     {
         SearchBarBackground->setWindowTitle(QCoreApplication::translate("SearchBarBackground", "Frame", nullptr));
         SearchBar->setText(QCoreApplication::translate("SearchBarBackground", "Editor", nullptr));
+        listView->setProperty("gh", QVariant(QString()));
     } // retranslateUi
 
 };

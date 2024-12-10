@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>RAGE</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>res/Logo/favicon.ico</normaloff>res/Logo/favicon.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#RAGE
 {
@@ -64,8 +68,8 @@
        <item>
         <widget class="QPushButton" name="RAGE_Logo">
          <property name="icon">
-          <iconset resource="Resources/Base.qrc">
-           <normaloff>:/res/Logo/RAGE.svg</normaloff>:/res/Logo/RAGE.svg</iconset>
+          <iconset>
+           <normaloff>res/Logo/RAGE.svg</normaloff>res/Logo/RAGE.svg</iconset>
          </property>
          <property name="flat">
           <bool>true</bool>

@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="res/Logo">
+  <qresource prefix="/res/Logo/">
     <file>RAGE.svg</file>
   </qresource>
 </RCC>

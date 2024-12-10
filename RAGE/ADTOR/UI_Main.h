@@ -40,6 +40,9 @@ public:
         if (RAGE->objectName().isEmpty())
             RAGE->setObjectName("RAGE");
         RAGE->resize(787, 582);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("res/Logo/favicon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        RAGE->setWindowIcon(icon);
         RAGE->setStyleSheet(QString::fromUtf8("#RAGE\n"
 "{\n"
 "	background-color: #222222;\n"
@@ -64,9 +67,9 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         RAGE_Logo = new QPushButton(TitleBar);
         RAGE_Logo->setObjectName("RAGE_Logo");
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/res/Logo/RAGE.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        RAGE_Logo->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8("res/Logo/RAGE.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        RAGE_Logo->setIcon(icon1);
         RAGE_Logo->setFlat(true);
 
         horizontalLayout->addWidget(RAGE_Logo);

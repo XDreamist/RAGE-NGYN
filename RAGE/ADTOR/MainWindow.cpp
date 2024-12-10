@@ -106,10 +106,7 @@ MainWindow::MainWindow(QWidget* parent = nullptr, bool open_rage = false)
 {
     if (openRage) {
         ui_Rage = new Ui_RAGE;
-
-
         ui_Rage->setupUi(this);
-        //addFunctions();
     }
     else {
         ui_ProjectSelect = new Ui_ProjectSelection;
@@ -122,70 +119,3 @@ MainWindow::~MainWindow()
     delete ui_Rage;
     delete ui_ProjectSelect;
 }
-
-//#include "QSearchBar.h"
-//
-//void MainWindow::addFunctions()
-//{
-//    auto* SearchBar = new SearchBarWidget(ui_Rage->TitleBar);
-//    ui_Rage->horizontalLayout->addWidget(SearchBar);
-    //connect(ui_Rage->SearchBar, &QLineEdit::textChanged, this, &MainWindow::onSearchBarTextChanged);
-
-    //// To detect focus changes
-    //ui_Rage->SearchBar->installEventFilter(this);
-//}
-
-// Override eventFilter to capture focus events
-//bool MainWindow::eventFilter(QObject* watched, QEvent* event)
-//{
-//    if (watched == ui_Rage->SearchBar) {
-//        if (event->type() == QEvent::FocusIn) {
-//            showScrollBar();
-//        }
-//        else if (event->type() == QEvent::FocusOut) {
-//            hideScrollBar();
-//        }
-//    }
-//    return QMainWindow::eventFilter(watched, event);
-//}
-//
-//void MainWindow::showScrollBar()
-//{
-//    // Example of showing a dropdown (QListView)
-//    if (!dropdownList) {
-//        dropdownList = new QListView(this);
-//        dropdownList->setModel(new QStringListModel({ "Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10", "Option 11", "Option 12" }));
-//        dropdownList->setGeometry(ui_Rage->SearchBar->x(),
-//            ui_Rage->SearchBar->y() + 2 * ui_Rage->SearchBar->height(),
-//            ui_Rage->SearchBar->width(),
-//            200);
-//        dropdownList->show();
-//    }
-//}
-//
-//void MainWindow::hideScrollBar()
-//{
-//    if (dropdownList) {
-//        dropdownList->hide();
-//        delete dropdownList;
-//        dropdownList = nullptr;
-//    }
-//}
-//
-//void MainWindow::onSearchBarTextChanged(const QString& text)
-//{
-//    // Filter dropdown suggestions based on the text
-//    if (dropdownList) {
-//        QStringList suggestions = { "Option 1", "Option 2", "Option 3" };
-//        QStringList filteredSuggestions;
-//
-//        for (const QString& option : suggestions) {
-//            if (option.contains(text, Qt::CaseInsensitive)) {
-//                filteredSuggestions.append(option);
-//            }
-//        }
-//
-//        auto* model = static_cast<QStringListModel*>(dropdownList->model());
-//        model->setStringList(filteredSuggestions);
-//    }
-//}

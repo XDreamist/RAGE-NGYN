@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef QSEARCHBAR_H
 #define QSEARCHBAR_H
 
@@ -8,24 +10,33 @@ class QSearchBar : public QWidget
     Q_OBJECT
 
 public:
-    QSearchBar(QWidget* parent = nullptr);
+    explicit QSearchBar(QWidget * parent = nullptr);
 
     ~QSearchBar();
 
-    bool eventFilter(QObject* watched, QEvent* event) override;
-    void showScrollBar();
-    void hideScrollBar();
-
 private:
-    class QLineEdit* searchBar = nullptr;
-    class QListView* dropdownList = nullptr;
-    class QVBoxLayout* layout = nullptr;
+    bool SearchActivated = false;
+    QString TypedText = "";
+    QString SearchText = "Editor";
+    QStringList SearchOptions;
+
+    class QLineEdit* SearchLine = nullptr;
+    class QCompleter* SearchList = nullptr;
+    class QAbstractItemView* SearchPopup = nullptr;
+    class QVBoxLayout* SBLayout = nullptr;
+
+    class QPropertyAnimation* SearchListAnim = nullptr;
 
     void setupUI();
     void setupConnections();
 
+    void setSearchText(const QString& text = "");
+    void showSearchList();
+    void resetSearchLine();
+
+    bool eventFilter(QObject* watched, QEvent* event) override;
+
 private slots:
-    void onSearchBarFocused();
     void onSearchTextChanged(const QString& text);
 };
 

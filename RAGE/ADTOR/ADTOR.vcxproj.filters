@@ -12,6 +12,7 @@
     <ClCompile Include="QtCustom\QSearchBar.cpp">
       <Filter>QtCustom</Filter>
     </ClCompile>
+    <ClCompile Include="QtCustom\QSearchList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
@@ -24,6 +25,8 @@
     <ClInclude Include="QtCustom\QSearchBar.h">
       <Filter>QtCustom</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="QtCustom\QSearchList.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\update_ui.bat">
@@ -35,6 +38,7 @@
     <None Include="ui\UI_ProjectSelection.ui">
       <Filter>ui</Filter>
     </None>
+    <None Include="ui\Resources\Base.qrc" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -46,5 +50,11 @@
     <Filter Include="System">
       <UniqueIdentifier>{e3738f83-68c6-4ae9-b661-e6652651eec9}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ADTOR.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\bin\res\Logo\favicon.ico" />
   </ItemGroup>
 </Project>
