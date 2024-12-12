@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>res/Logo/favicon.ico</normaloff>res/Logo/favicon.ico</iconset>
+    <normaloff>res/Logo/RAGE.png</normaloff>res/Logo/RAGE.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#RAGE
@@ -54,7 +54,7 @@
         <number>0</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="topMargin">
         <number>0</number>
@@ -69,7 +69,13 @@
         <widget class="QPushButton" name="RAGE_Logo">
          <property name="icon">
           <iconset>
-           <normaloff>res/Logo/RAGE.svg</normaloff>res/Logo/RAGE.svg</iconset>
+           <normaloff>res/Logo/RAGE.png</normaloff>res/Logo/RAGE.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -130,7 +136,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="Resources/Base.qrc"/>
+  <include location="Base.qrc"/>
  </resources>
  <connections/>
 </ui>

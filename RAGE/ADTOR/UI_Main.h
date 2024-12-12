@@ -41,7 +41,7 @@ public:
             RAGE->setObjectName("RAGE");
         RAGE->resize(787, 582);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("res/Logo/favicon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon.addFile(QString::fromUtf8("res/Logo/RAGE.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         RAGE->setWindowIcon(icon);
         RAGE->setStyleSheet(QString::fromUtf8("#RAGE\n"
 "{\n"
@@ -64,12 +64,11 @@ public:
         horizontalLayout = new QHBoxLayout(TitleBar);
         horizontalLayout->setSpacing(0);
         horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout->setContentsMargins(2, 0, 0, 0);
         RAGE_Logo = new QPushButton(TitleBar);
         RAGE_Logo->setObjectName("RAGE_Logo");
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("res/Logo/RAGE.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        RAGE_Logo->setIcon(icon1);
+        RAGE_Logo->setIcon(icon);
+        RAGE_Logo->setIconSize(QSize(18, 18));
         RAGE_Logo->setFlat(true);
 
         horizontalLayout->addWidget(RAGE_Logo);
