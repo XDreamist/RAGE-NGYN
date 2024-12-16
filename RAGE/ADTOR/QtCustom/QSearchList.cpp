@@ -33,16 +33,16 @@ QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSCustomCompleterENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSCustomCompleterENDCLASS = QtMocHelpers::stringData(
-    "CustomCompleter"
+struct qt_meta_stringdata_CLASSQSearchListENDCLASS_t {};
+constexpr auto qt_meta_stringdata_CLASSQSearchListENDCLASS = QtMocHelpers::stringData(
+    "QSearchList"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 } // unnamed namespace
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSCustomCompleterENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_CLASSQSearchListENDCLASS[] = {
 
  // content:
       12,       // revision
@@ -58,20 +58,20 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSCustomCompleterENDCLASS[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject CustomCompleter::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject QSearchList::staticMetaObject = { {
     QMetaObject::SuperData::link<QCompleter::staticMetaObject>(),
-    qt_meta_stringdata_CLASSCustomCompleterENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSCustomCompleterENDCLASS,
+    qt_meta_stringdata_CLASSQSearchListENDCLASS.offsetsAndSizes,
+    qt_meta_data_CLASSQSearchListENDCLASS,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSCustomCompleterENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSQSearchListENDCLASS_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<CustomCompleter, std::true_type>
+        QtPrivate::TypeAndForceComplete<QSearchList, std::true_type>
     >,
     nullptr
 } };
 
-void CustomCompleter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void QSearchList::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     (void)_o;
     (void)_id;
@@ -79,22 +79,96 @@ void CustomCompleter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     (void)_a;
 }
 
-const QMetaObject *CustomCompleter::metaObject() const
+const QMetaObject *QSearchList::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *CustomCompleter::qt_metacast(const char *_clname)
+void *QSearchList::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSCustomCompleterENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_CLASSQSearchListENDCLASS.stringdata0))
         return static_cast<void*>(this);
     return QCompleter::qt_metacast(_clname);
 }
 
-int CustomCompleter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int QSearchList::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QCompleter::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP
+
+
+#include <QtWidgets/QAbstractItemView>
+#include <QtCore/QStringListModel>
+#include <QtCore/QPropertyAnimation>
+
+QSearchList::QSearchList(const QStringList& options, QObject* parent) : QCompleter(parent) 
+{
+    SearchOptions = options;
+    SearchModel = new QStringListModel(options, this);
+    setModel(SearchModel);
+    setCaseSensitivity(Qt::CaseInsensitive);
+    setCompletionMode(QCompleter::PopupCompletion);
+    setFilterMode(Qt::MatchContains);
+
+    setupUI();
+}
+
+QSearchList::~QSearchList() = default;
+
+void QSearchList::setupUI()
+{
+    QAbstractItemView* SearchPopup = popup();
+    SearchPopup->setObjectName("SearchPopup");
+    SearchPopup->setStyleSheet(R"(
+        QAbstractItemView {
+            color: #F0F0F0;
+            background-color: #2E2E2E;
+            border: 1px solid #FC7703;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-top: 1px solid #151515;
+        }
+        QAbstractItemView::item {
+            padding: 4px 14px;
+        }
+        QAbstractItemView::item:hover {
+            background-color: #222222;
+            padding: 4px 8px;
+        }
+        QAbstractItemView::item:selected {
+            background-color: #000000;
+            padding: 4px 8px;
+        }
+        QScrollBar:vertical {
+            border: none;
+            background-color: #333333;
+            width: 4px;
+            margin: 0px 0px 0px 0px;
+        }
+        QScrollBar::handle:vertical {
+            background-color: #555555;
+            min-height: 10px;
+            border-radius: 2px;
+        }
+        QScrollBar::handle:vertical:hover {
+            background-color: #777777;
+        }
+        QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical {
+            border: none;
+            background: none;
+            height: 0px;
+        }
+        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+        }
+    )");
+
+    SearchListAnim = new QPropertyAnimation(this, "geometry");
+    SearchListAnim->setDuration(200);
+    SearchListAnim->setEasingCurve(QEasingCurve::OutQuad);
+}

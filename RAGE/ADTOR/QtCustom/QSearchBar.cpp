@@ -36,9 +36,8 @@ namespace {
     struct qt_meta_stringdata_CLASSQSearchBarENDCLASS_t {};
     constexpr auto qt_meta_stringdata_CLASSQSearchBarENDCLASS = QtMocHelpers::stringData(
         "QSearchBar",
-        "onSearchTextChanged",
-        "",
-        "text"
+        "onButtonClicked",
+        ""
     );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -59,10 +58,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSQSearchBarENDCLASS[] = {
           0,       // signalCount
 
           // slots: name, argc, parameters, tag, flags, initial metatype offsets
-                1,    1,   20,    2, 0x08,    1 /* Private */,
+                1,    0,   20,    2, 0x08,    1 /* Private */,
 
                 // slots: parameters
-                   QMetaType::Void, QMetaType::QString,    3,
+                   QMetaType::Void,
 
                       0        // eod
 };
@@ -76,9 +75,8 @@ Q_CONSTINIT const QMetaObject QSearchBar::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSQSearchBarENDCLASS_t,
     // Q_OBJECT / Q_GADGET
     QtPrivate::TypeAndForceComplete<QSearchBar, std::true_type>,
-    // method 'onSearchTextChanged'
-    QtPrivate::TypeAndForceComplete<void, std::false_type>,
-    QtPrivate::TypeAndForceComplete<const QString&, std::false_type>
+    // method 'onButtonClicked'
+    QtPrivate::TypeAndForceComplete<void, std::false_type>
 >,
 nullptr
 } };
@@ -89,10 +87,11 @@ void QSearchBar::qt_static_metacall(QObject* _o, QMetaObject::Call _c, int _id, 
         auto* _t = static_cast<QSearchBar*>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->onSearchTextChanged((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 0: _t->onButtonClicked(); break;
         default:;
         }
     }
+    (void)_a;
 }
 
 const QMetaObject* QSearchBar::metaObject() const
@@ -128,15 +127,12 @@ int QSearchBar::qt_metacall(QMetaObject::Call _c, int _id, void** _a)
 QT_WARNING_POP
 
 
-#include <QtWidgets/QLabel>
 #include <QtCore/QEvent>
-#include <QtWidgets/QlistView>
-#include <QtCore/QStringListModel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QApplication>
-#include <QtCore/QPropertyAnimation>
-#include <QtWidgets/QScrollBar>
 #include "QSearchList.h"
 
 QSearchBar::QSearchBar(QWidget* parent)
@@ -151,19 +147,32 @@ QSearchBar::~QSearchBar() = default;
 void QSearchBar::setupUI()
 {
     // Initialize search bar
+    SearchButton = new QPushButton("Editor", this);
+    SearchButton->setObjectName("SearchButton");
+    SearchButton->setStyleSheet(R"(
+        QPushButton {
+            background-color: #2E2E2E;
+            color: #D3D3D3;
+            padding: 6px 10px;
+            border: 1px solid #3E3E3E;
+            border-radius: 5px;
+            margin: 1px 0px;
+        }
+    )");
+    SearchButton->setCursor(Qt::IBeamCursor);
+
     SearchLine = new QLineEdit(this);
     SearchLine->setObjectName("SearchBar");
-    setSearchText("Editor");
     SearchLine->setPlaceholderText("Type to search...");
     SearchLine->setStyleSheet(R"(
-        #SearchBar {
+        QLineEdit {
             background-color: #2E2E2E;
             color: #D3D3D3;
             padding: 6px 10px;
             border: 1px solid #3E3E3E;
             border-radius: 5px;
         }
-        #SearchBar:focus {
+        QLineEdit:focus {
             padding: 6px 10px;
             border: 1px solid #FC7703;
             border-top-left-radius: 5px;
@@ -174,69 +183,21 @@ void QSearchBar::setupUI()
             outline: none;
         }
     )");
-    SearchLine->setAlignment(Qt::AlignCenter);
 
     // Initialize SearchList
-    QStringList options = { "Editor", "File", "View", "Option 1", "Option 2", "Option 3" };
+    SearchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
 
-    SearchList = new CustomCompleter(options, this);
-    SearchList->setCaseSensitivity(Qt::CaseInsensitive);
-    SearchList->setCompletionMode(QCompleter::PopupCompletion);
-    SearchList->setFilterMode(Qt::MatchContains);
+    SearchList = new QSearchList(SearchOptions, this);
+    SearchList->setMaxVisibleItems(10);
+
     SearchLine->setCompleter(SearchList);
-
     SearchPopup = SearchList->popup();
-    SearchPopup->setObjectName("SearchList");
-    SearchPopup->setStyleSheet(R"(
-        #SearchList {
-            color: #F0F0F0;
-            background-color: #2E2E2E;
-            border: 1px solid #FC7703;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            border-top: 1px solid #151515;
-        }
-        #SearchList::item {
-            padding: 4px 14px;
-        }
-        #SearchList::item:hover {
-            background-color: #222222;
-            padding: 4px 8px;
-        }
-        QScrollBar:vertical {
-            border: none;
-            background-color: #333333;
-            width: 4px;
-            margin: 0px 0px 0px 0px;
-        }
-        QScrollBar::handle:vertical {
-            background-color: #555555;
-            min-height: 10px;
-            border-radius: 2px;
-        }
-        QScrollBar::handle:vertical:hover {
-            background-color: #777777;
-        }
-        QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical {
-            border: none;
-            background: none;
-            height: 0px;
-        }
-        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-            background: none;
-        }
-    )");
-
-    SearchListAnim = new QPropertyAnimation(SearchList, "geometry");
-    SearchListAnim->setDuration(200);
-    SearchListAnim->setEasingCurve(QEasingCurve::OutQuad);
 
     // Set up layout
     SBLayout = new QVBoxLayout(this);
     SBLayout->setContentsMargins(0, 5, 0, 0);
     SBLayout->setSpacing(0);
+    SBLayout->addWidget(SearchButton);
     SBLayout->addWidget(SearchLine);
     setLayout(SBLayout);
 
@@ -247,12 +208,12 @@ void QSearchBar::setupUI()
 
 void QSearchBar::setupConnections()
 {
-    connect(SearchLine, &QLineEdit::textChanged, this, &QSearchBar::onSearchTextChanged);
+    connect(SearchButton, &QPushButton::clicked, this, &QSearchBar::onButtonClicked);
     
     connect(SearchList, QOverload<const QString&>::of(&QCompleter::highlighted),
         this, [this](const QString& text) {
             setSearchText(text);
-            resetSearchLine();
+            activateSearch(false);
         });
 
     //connect(SearchList, QOverload<const QModelIndex&>::of(&QCompleter::activated),
@@ -264,16 +225,16 @@ void QSearchBar::setupConnections()
 void QSearchBar::setSearchText(const QString& text)
 {
     if (!text.isEmpty()) SearchText = text;
-    if (SearchLine) SearchLine->setText(SearchText);
+    if (SearchButton) SearchButton->setText(SearchText);
 }
 
-void QSearchBar::showSearchList()
+void QSearchBar::activateSearch(bool activate)
 {
-    if (SearchList) {
-        SearchLine->blockSignals(true);
-        SearchLine->clear();
-        SearchLine->setAlignment(Qt::AlignLeft);
-        SearchLine->blockSignals(false);
+    if (activate) {
+        SearchButton->hide();
+
+        SearchLine->show();
+        SearchLine->setFocus();
 
         //SearchListAnim->setStartValue(startRect);
         //SearchListAnim->setEndValue(endRect);
@@ -281,26 +242,28 @@ void QSearchBar::showSearchList()
         SearchList->complete();
         //SearchListAnim->start();
     }
-}
+    else {
+        SearchLine->clear();
 
-void QSearchBar::resetSearchLine()
-{
-    if (SearchLine) {
-        SearchLine->blockSignals(true);
-        SearchLine->setReadOnly(true);
-        SearchLine->setCursor(Qt::ArrowCursor);
-        SearchLine->setAlignment(Qt::AlignCenter);
-        SearchLine->clearFocus();
-        SearchLine->setReadOnly(false);
-        SearchLine->blockSignals(false);
+        if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion) SearchList->setCompletionMode(QCompleter::PopupCompletion);
+        SearchList->setCompletionPrefix("");
+
+        SearchLine->hide();
+
+        SearchButton->show();
     }
 }
 
-void QSearchBar::onSearchTextChanged(const QString& text)
+void QSearchBar::onButtonClicked() {
+    activateSearch(true);
+}
+
+void QSearchBar::resizeEvent(QResizeEvent* event)
 {
-    if (SearchLine && text != SearchText) {
-        TypedText = text;
-        qDebug() << "You typed : " << text;
+    QWidget::resizeEvent(event);
+
+    if (SearchPopup) {
+        SearchButton->setFixedWidth(SearchLine->width());
     }
 }
 
@@ -308,28 +271,21 @@ bool QSearchBar::eventFilter(QObject* object, QEvent* event)
 {
     qDebug() << object << " : " << event->type();
 
-    if (object == SearchPopup && event->type() == QEvent::Show) {
-        SearchActivated = true;
+    if (object == SearchLine && event->type() == QEvent::MetaCall) {
+        activateSearch(false);
     }
 
-    if (object == SearchLine && event->type() == QEvent::FocusIn) {
-        showSearchList();
-    }
-    else if (object == SearchLine && event->type() == QEvent::FocusOut) {
-        if (!SearchActivated) {
-            setSearchText();
-            resetSearchLine();
+    if (object == SearchPopup && event->type() == QEvent::Hide) {
+        if (SearchLine->text().isEmpty()) {
+            activateSearch(false);
         }
-    }
-    else if (SearchPopup && event->type() == QEvent::Hide) {
-        SearchActivated = false;
-        if (!TypedText.isEmpty()) {
-            SearchLine->setText(TypedText);
-            SearchLine->setFocus();
+        else if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion
+            // !!! FIX THIS !!!
+            /*|| SearchList->completionCount() < SearchOptions.length()*/) {
+            activateSearch(false);
         }
         else {
-            setSearchText();
-            resetSearchLine();
+            SearchList->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
         }
     }
     return QWidget::eventFilter(object, event);

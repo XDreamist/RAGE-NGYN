@@ -14,30 +14,30 @@ public:
 
     ~QSearchBar();
 
-private:
-    bool SearchActivated = false;
-    QString TypedText = "";
-    QString SearchText = "Editor";
-    QStringList SearchOptions;
-
+public:
+    class QPushButton* SearchButton = nullptr;
     class QLineEdit* SearchLine = nullptr;
-    class QCompleter* SearchList = nullptr;
+    class QSearchList* SearchList = nullptr;
     class QAbstractItemView* SearchPopup = nullptr;
+
+protected:
     class QVBoxLayout* SBLayout = nullptr;
 
-    class QPropertyAnimation* SearchListAnim = nullptr;
+    bool SearchActivated = false;
+    QString SearchText = "Editor";
+    QStringList SearchOptions;
 
     void setupUI();
     void setupConnections();
 
     void setSearchText(const QString& text = "");
-    void showSearchList();
-    void resetSearchLine();
+    void activateSearch(bool activate);
 
+    void resizeEvent(QResizeEvent* event);
     bool eventFilter(QObject* watched, QEvent* event) override;
 
 private slots:
-    void onSearchTextChanged(const QString& text);
+    void onButtonClicked();
 };
 
 #endif // QSEARCHBAR_H
