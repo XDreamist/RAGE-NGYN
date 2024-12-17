@@ -13,6 +13,7 @@
       <Filter>QtCustom</Filter>
     </ClCompile>
     <ClCompile Include="QtCustom\QSearchList.cpp" />
+    <ClCompile Include="QtCustom\QTitleBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
@@ -21,12 +22,12 @@
     <ClInclude Include="System\ConfigManager.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="UI_SearchBar.h" />
     <ClInclude Include="QtCustom\QSearchBar.h">
       <Filter>QtCustom</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="QtCustom\QSearchList.h" />
+    <ClInclude Include="QtCustom\QTitleBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\update_ui.bat">

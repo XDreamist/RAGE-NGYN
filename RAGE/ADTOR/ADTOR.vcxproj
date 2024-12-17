@@ -107,6 +107,7 @@
   <ItemGroup>
     <ClCompile Include="QtCustom\QSearchBar.cpp" />
     <ClCompile Include="QtCustom\QSearchList.cpp" />
+    <ClCompile Include="QtCustom\QTitleBar.cpp" />
     <ClCompile Include="System\ConfigManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -115,12 +116,12 @@
   <ItemGroup>
     <ClInclude Include="QtCustom\QSearchBar.h" />
     <ClInclude Include="QtCustom\QSearchList.h" />
+    <ClInclude Include="QtCustom\QTitleBar.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="System\ConfigManager.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_ProjectSelection.h" />
-    <ClInclude Include="UI_SearchBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\Resources\Base.qrc" />

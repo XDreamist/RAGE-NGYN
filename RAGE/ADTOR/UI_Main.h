@@ -12,13 +12,11 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
-#include "QtCustom/QSearchBar.h"
+#include "QtCustom/QTitleBar.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -26,80 +24,197 @@ class Ui_RAGE
 {
 public:
     QWidget *centralwidget;
-    QGridLayout *gridLayout;
-    QWidget *TitleBar;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *RAGE_Logo;
-    QSpacerItem *HRSpacer1;
-    QSearchBar *SearchBar;
-    QSpacerItem *HRSpacer2;
-    QWidget *ContentArea;
+    QGridLayout *CentralLayout;
+    QTitleBar *TitleBar;
+    QDockWidget *dockWidget_5;
+    QWidget *dockWidgetContents_2;
+    QDockWidget *dockWidget_6;
+    QWidget *dockWidgetContents_3;
+    QDockWidget *dockWidget_7;
+    QWidget *dockWidgetContents_7;
 
     void setupUi(QMainWindow *RAGE)
     {
         if (RAGE->objectName().isEmpty())
             RAGE->setObjectName("RAGE");
         RAGE->resize(787, 582);
+        QPalette palette;
+        QBrush brush(QColor(211, 211, 211, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(25, 22, 29, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        QBrush brush2(QColor(211, 211, 211, 128));
+        brush2.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+#endif
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+#endif
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+#endif
+        RAGE->setPalette(palette);
         QIcon icon;
         icon.addFile(QString::fromUtf8("res/Logo/RAGE.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         RAGE->setWindowIcon(icon);
-        RAGE->setStyleSheet(QString::fromUtf8("#RAGE\n"
-"{\n"
-"	background-color: #222222;\n"
-"	color: #D3D3D3;\n"
-"}"));
+        RAGE->setStyleSheet(QString::fromUtf8("QDockWidget {}"));
+        RAGE->setDockNestingEnabled(true);
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush3(QColor(34, 34, 34, 255));
+        brush3.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Button, brush3);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush3);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush3);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+#endif
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush3);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush3);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush3);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+#endif
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush3);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush3);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush3);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+#endif
+        RAGE->setProperty("DarkTheme", QVariant(palette1));
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush1);
+        palette2.setBrush(QPalette::Active, QPalette::ToolTipText, brush1);
+        QBrush brush4(QColor(25, 22, 29, 128));
+        brush4.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Active, QPalette::PlaceholderText, brush4);
+#endif
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush4);
+#endif
+        QBrush brush5(QColor(120, 120, 120, 255));
+        brush5.setStyle(Qt::SolidPattern);
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush5);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush5);
+        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush5);
+        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush1);
+        QBrush brush6(QColor(0, 0, 0, 128));
+        brush6.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette2.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush6);
+#endif
+        RAGE->setProperty("LightTheme", QVariant(palette2));
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Active, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette3.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+#endif
+        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette3.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+#endif
+        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette3.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+#endif
+        RAGE->setProperty("RageTheme", QVariant(palette3));
         centralwidget = new QWidget(RAGE);
         centralwidget->setObjectName("centralwidget");
-        gridLayout = new QGridLayout(centralwidget);
-        gridLayout->setSpacing(0);
-        gridLayout->setObjectName("gridLayout");
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        TitleBar = new QWidget(centralwidget);
+        centralwidget->setProperty("RageLogo", QVariant(icon));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8("res/Title/Minus.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        centralwidget->setProperty("MinusIcon", QVariant(icon1));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8("res/Title/Maximize.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        centralwidget->setProperty("MaximIcon", QVariant(icon2));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8("res/Title/Minimize.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        centralwidget->setProperty("MinimIcon", QVariant(icon3));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8("res/Title/Close.svg"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        centralwidget->setProperty("CloseIcon", QVariant(icon4));
+        CentralLayout = new QGridLayout(centralwidget);
+        CentralLayout->setSpacing(0);
+        CentralLayout->setObjectName("CentralLayout");
+        CentralLayout->setContentsMargins(0, 0, 0, 0);
+        TitleBar = new QTitleBar(centralwidget);
         TitleBar->setObjectName("TitleBar");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(TitleBar->sizePolicy().hasHeightForWidth());
         TitleBar->setSizePolicy(sizePolicy);
-        horizontalLayout = new QHBoxLayout(TitleBar);
-        horizontalLayout->setSpacing(0);
-        horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(2, 0, 0, 0);
-        RAGE_Logo = new QPushButton(TitleBar);
-        RAGE_Logo->setObjectName("RAGE_Logo");
-        RAGE_Logo->setIcon(icon);
-        RAGE_Logo->setIconSize(QSize(18, 18));
-        RAGE_Logo->setFlat(true);
 
-        horizontalLayout->addWidget(RAGE_Logo);
-
-        HRSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout->addItem(HRSpacer1);
-
-        SearchBar = new QSearchBar(TitleBar);
-        SearchBar->setObjectName("SearchBar");
-
-        horizontalLayout->addWidget(SearchBar);
-
-        HRSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout->addItem(HRSpacer2);
-
-
-        gridLayout->addWidget(TitleBar, 2, 0, 1, 1);
-
-        ContentArea = new QWidget(centralwidget);
-        ContentArea->setObjectName("ContentArea");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(1);
-        sizePolicy1.setHeightForWidth(ContentArea->sizePolicy().hasHeightForWidth());
-        ContentArea->setSizePolicy(sizePolicy1);
-
-        gridLayout->addWidget(ContentArea, 3, 0, 1, 1);
+        CentralLayout->addWidget(TitleBar, 2, 0, 1, 1, Qt::AlignTop);
 
         RAGE->setCentralWidget(centralwidget);
+        dockWidget_5 = new QDockWidget(RAGE);
+        dockWidget_5->setObjectName("dockWidget_5");
+        dockWidgetContents_2 = new QWidget();
+        dockWidgetContents_2->setObjectName("dockWidgetContents_2");
+        dockWidget_5->setWidget(dockWidgetContents_2);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_5);
+        dockWidget_6 = new QDockWidget(RAGE);
+        dockWidget_6->setObjectName("dockWidget_6");
+        dockWidgetContents_3 = new QWidget();
+        dockWidgetContents_3->setObjectName("dockWidgetContents_3");
+        dockWidget_6->setWidget(dockWidgetContents_3);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_6);
+        dockWidget_7 = new QDockWidget(RAGE);
+        dockWidget_7->setObjectName("dockWidget_7");
+        dockWidgetContents_7 = new QWidget();
+        dockWidgetContents_7->setObjectName("dockWidgetContents_7");
+        dockWidget_7->setWidget(dockWidgetContents_7);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_7);
 
         retranslateUi(RAGE);
 

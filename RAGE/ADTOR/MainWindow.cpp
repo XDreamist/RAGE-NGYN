@@ -101,12 +101,21 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 QT_WARNING_POP
 
+#include <QtGui/QGuiApplication>
+#include <QtGui/QScreen>
+
 MainWindow::MainWindow(QWidget* parent = nullptr, bool open_rage = false)
     : QMainWindow(parent), openRage(open_rage)
 {
     if (openRage) {
         ui_Rage = new Ui_RAGE;
         ui_Rage->setupUi(this);
+
+        this->setMenuWidget(ui_Rage->TitleBar);
+        this->setWindowFlag(Qt::Window);
+        //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+        //adjustButtonSize(QGuiApplication::primaryScreen()->size());
     }
     else {
         ui_ProjectSelect = new Ui_ProjectSelection;
@@ -118,4 +127,22 @@ MainWindow::~MainWindow()
 {
     delete ui_Rage;
     delete ui_ProjectSelect;
+}
+
+void MainWindow::adjustButtonSize(const QSize& screenSize)
+{
+    qreal dpiScale = QGuiApplication::primaryScreen()->devicePixelRatio();
+    int buttonSize = qMax(20, screenSize.width() / 100);
+    //buttonSize *= dpiScale; // Scale based on DPI
+
+    setStyleSheet(QString(
+        "QPushButton { "
+        "   font-size: %2px; "
+        "   width: %1px; "
+        "   height: %1px; "
+        "   background-color: #444; "
+        "   border-radius: 5px; "
+        "   color: white; "
+        "}"
+    ).arg(buttonSize / 2).arg(buttonSize));
 }

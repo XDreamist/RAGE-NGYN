@@ -20,6 +20,8 @@ public:
     class QSearchList* SearchList = nullptr;
     class QAbstractItemView* SearchPopup = nullptr;
 
+    int MaxVisibleItems = 10;
+
 protected:
     class QVBoxLayout* SBLayout = nullptr;
 

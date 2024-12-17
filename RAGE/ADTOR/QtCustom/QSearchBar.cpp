@@ -139,7 +139,6 @@ QSearchBar::QSearchBar(QWidget* parent)
     : QWidget(parent)
 {
     setupUI();
-    setupConnections();
 }
 
 QSearchBar::~QSearchBar() = default;
@@ -149,6 +148,11 @@ void QSearchBar::setupUI()
     // Initialize search bar
     SearchButton = new QPushButton("Editor", this);
     SearchButton->setObjectName("SearchButton");
+    QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Preferred);
+    sizePolicy.setHorizontalStretch(0);
+    sizePolicy.setVerticalStretch(0);
+    sizePolicy.setHeightForWidth(SearchButton->sizePolicy().hasHeightForWidth());
+    SearchButton->setSizePolicy(sizePolicy);
     SearchButton->setStyleSheet(R"(
         QPushButton {
             background-color: #2E2E2E;
@@ -188,7 +192,7 @@ void QSearchBar::setupUI()
     SearchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
 
     SearchList = new QSearchList(SearchOptions, this);
-    SearchList->setMaxVisibleItems(10);
+    SearchList->setMaxVisibleItems(MaxVisibleItems);
 
     SearchLine->setCompleter(SearchList);
     SearchPopup = SearchList->popup();
@@ -199,11 +203,12 @@ void QSearchBar::setupUI()
     SBLayout->setSpacing(0);
     SBLayout->addWidget(SearchButton);
     SBLayout->addWidget(SearchLine);
-    setLayout(SBLayout);
 
     // Connect signals and events
     SearchLine->installEventFilter(this);
     SearchPopup->installEventFilter(this);
+
+    setupConnections();
 }
 
 void QSearchBar::setupConnections()
@@ -262,8 +267,8 @@ void QSearchBar::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
 
-    if (SearchPopup) {
-        SearchButton->setFixedWidth(SearchLine->width());
+    if (SearchLine) {
+        //SearchButton->setFixedWidth(SearchLine->width());
     }
 }
 
