@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef QSEARCHBAR_H
-#define QSEARCHBAR_H
-
 #include <QtWidgets/QWidget>
 
 class QSearchBar : public QWidget
@@ -41,5 +38,3 @@ protected:
 private slots:
     void onButtonClicked();
 };
-
-#endif // QSEARCHBAR_H

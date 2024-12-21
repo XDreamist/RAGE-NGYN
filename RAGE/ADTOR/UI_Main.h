@@ -15,7 +15,11 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "QtCustom/QDockWindow.h"
 #include "QtCustom/QTitleBar.h"
 
 QT_BEGIN_NAMESPACE
@@ -26,8 +30,11 @@ public:
     QWidget *centralwidget;
     QGridLayout *CentralLayout;
     QTitleBar *TitleBar;
-    QDockWidget *dockWidget_5;
+    QDockWindow *dockWidget_5;
     QWidget *dockWidgetContents_2;
+    QVBoxLayout *verticalLayout;
+    QPushButton *pushButton;
+    QTextEdit *textEdit;
     QDockWidget *dockWidget_6;
     QWidget *dockWidgetContents_3;
     QDockWidget *dockWidget_7;
@@ -76,7 +83,6 @@ public:
         QIcon icon;
         icon.addFile(QString::fromUtf8("res/Logo/RAGE.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         RAGE->setWindowIcon(icon);
-        RAGE->setStyleSheet(QString::fromUtf8("QDockWidget {}"));
         RAGE->setDockNestingEnabled(true);
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
@@ -197,10 +203,22 @@ public:
         CentralLayout->addWidget(TitleBar, 2, 0, 1, 1, Qt::AlignTop);
 
         RAGE->setCentralWidget(centralwidget);
-        dockWidget_5 = new QDockWidget(RAGE);
+        dockWidget_5 = new QDockWindow(RAGE);
         dockWidget_5->setObjectName("dockWidget_5");
         dockWidgetContents_2 = new QWidget();
         dockWidgetContents_2->setObjectName("dockWidgetContents_2");
+        verticalLayout = new QVBoxLayout(dockWidgetContents_2);
+        verticalLayout->setObjectName("verticalLayout");
+        pushButton = new QPushButton(dockWidgetContents_2);
+        pushButton->setObjectName("pushButton");
+
+        verticalLayout->addWidget(pushButton);
+
+        textEdit = new QTextEdit(dockWidgetContents_2);
+        textEdit->setObjectName("textEdit");
+
+        verticalLayout->addWidget(textEdit);
+
         dockWidget_5->setWidget(dockWidgetContents_2);
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_5);
         dockWidget_6 = new QDockWidget(RAGE);
@@ -224,6 +242,10 @@ public:
     void retranslateUi(QMainWindow *RAGE)
     {
         RAGE->setWindowTitle(QCoreApplication::translate("RAGE", "RAGE", nullptr));
+        dockWidget_5->setWindowTitle(QCoreApplication::translate("RAGE", "Heierarchy", nullptr));
+        pushButton->setText(QCoreApplication::translate("RAGE", "PushButton", nullptr));
+        dockWidget_6->setWindowTitle(QCoreApplication::translate("RAGE", "Viewport", nullptr));
+        dockWidget_7->setWindowTitle(QCoreApplication::translate("RAGE", "Content Browser", nullptr));
     } // retranslateUi
 
 };

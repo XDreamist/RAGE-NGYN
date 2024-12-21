@@ -1,55 +1,68 @@
 #include "ConfigManager.h"
 
 #include <iostream>
-#include <QtCore/QDir>
 #include <QtCore/QFile>
-#include <QtCore/QSettings>
-#include <QtCore/QString>
 
 
-namespace fs = std::filesystem;
-
-ConfigManager::ConfigManager() : settings(nullptr)
+ConfigManager& ConfigManager::getInstance()
 {
+    static ConfigManager manager;
+    return manager;
+}
+
+ConfigManager::ConfigManager()
+{
+    configFound = findConfig();
 }
 
 ConfigManager::~ConfigManager()
 {
-    delete settings;
+    settings.reset();
+}
+
+bool ConfigManager::isValid() const
+{
+    return configFound;
 }
 
 bool ConfigManager::findConfig()
 {
-    {
-        QString configFilePath = QDir::currentPath() + "/config.ini";
+    if (QFile::exists(configFilePath)) {
+        settings = std::make_unique<QSettings>(configFilePath, QSettings::IniFormat);
 
-        if (QFile::exists(configFilePath)) {
-            settings = new QSettings(configFilePath, QSettings::IniFormat);
-
-            if (settings->status() != QSettings::NoError) {
-                std::cout << "Error found in config.ini." << std::endl;
-                return false;
-            }
-
-            QStringList keys = settings->allKeys();
-
-            for (const QString& key : keys) {
-                std::cout << "Key: " << key.toStdString() << ", Value: " << settings->value(key).toString().toStdString() << std::endl;
-            }
-
-            QVariant prName = settings->value("Project Name");
-
-            if (prName.isValid()) {
-                std::cout << "Found and loaded config.ini file. Project Name: " << prName.toString().toStdString() << std::endl;
-            }
-            else {
-                std::cout << "Project Name key not found in config.ini." << std::endl;
-            }
-
-            return true;
+        if (settings->status() != QSettings::NoError) {
+            qDebug() << "Error reading config.ini.";
+            return false;
         }
 
-        std::cout << "No config.ini file found in the current directory." << std::endl;
-        return false;
+        QStringList keys = settings->allKeys();
+        for (const QString& key : keys) {
+            qDebug() << "Key:" << key << ", Value:" << settings->value(key).toString();
+        }
+
+        QVariant projectName = settings->value(projectNameKey);
+        if (projectName.isValid()) {
+            qDebug() << "Found config.ini. Project Name:" << projectName.toString();
+        }
+        else {
+            qDebug() << "Project Name key not found in config.ini.";
+        }
+
+        return true;
+    }
+
+    qDebug() << "No config.ini file found in the current directory.";
+    return false;
+}
+
+QString ConfigManager::getValue(const QString& key, const QString& defaultValue) const
+{
+    return settings ? settings->value(key, defaultValue).toString() : defaultValue;
+}
+
+void ConfigManager::setValue(const QString& key, const QString& value)
+{
+    if (settings) {
+        settings->setValue(key, value);
     }
 }

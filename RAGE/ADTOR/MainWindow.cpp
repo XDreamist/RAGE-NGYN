@@ -101,20 +101,21 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 QT_WARNING_POP
 
+
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
+#include "System/LibManager.h"
 
-MainWindow::MainWindow(QWidget* parent = nullptr, bool open_rage = false)
-    : QMainWindow(parent), openRage(open_rage)
+MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), OpenRage(open_rage)
 {
-    if (openRage) {
+    this->setWindowFlag(Qt::Window);
+    //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    if (OpenRage) {
         ui_Rage = new Ui_RAGE;
         ui_Rage->setupUi(this);
 
+        LibManager facade("");
         this->setMenuWidget(ui_Rage->TitleBar);
-        this->setWindowFlag(Qt::Window);
-        //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
     }
     else {
@@ -140,9 +141,6 @@ void MainWindow::adjustButtonSize(const QSize& screenSize)
         "   font-size: %2px; "
         "   width: %1px; "
         "   height: %1px; "
-        "   background-color: #444; "
-        "   border-radius: 5px; "
-        "   color: white; "
         "}"
     ).arg(buttonSize / 2).arg(buttonSize));
 }

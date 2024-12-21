@@ -6,12 +6,12 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget* parent, bool open_rage);
+    explicit MainWindow(QWidget* parent = nullptr, bool open_rage = false);
 
     ~MainWindow();
 
 protected:
-    bool openRage = false;
+    bool OpenRage = false;
     class Ui_RAGE* ui_Rage = nullptr;
     class Ui_ProjectSelection* ui_ProjectSelect = nullptr;
 

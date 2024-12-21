@@ -105,6 +105,8 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="QtCustom\QDockTitle.cpp" />
+    <ClCompile Include="QtCustom\QDockWindow.cpp" />
     <ClCompile Include="QtCustom\QSearchBar.cpp" />
     <ClCompile Include="QtCustom\QSearchList.cpp" />
     <ClCompile Include="QtCustom\QTitleBar.cpp" />
@@ -114,12 +116,15 @@
     <ClCompile Include="QtCustom\QTriangleWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="QtCustom\QDockTitle.h" />
+    <ClInclude Include="QtCustom\QDockWindow.h" />
     <ClInclude Include="QtCustom\QSearchBar.h" />
     <ClInclude Include="QtCustom\QSearchList.h" />
     <ClInclude Include="QtCustom\QTitleBar.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="System\ConfigManager.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="System\LibManager.h" />
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_ProjectSelection.h" />
   </ItemGroup>

@@ -14,6 +14,8 @@
     </ClCompile>
     <ClCompile Include="QtCustom\QSearchList.cpp" />
     <ClCompile Include="QtCustom\QTitleBar.cpp" />
+    <ClCompile Include="QtCustom\QDockTitle.cpp" />
+    <ClCompile Include="QtCustom\QDockWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
@@ -28,6 +30,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="QtCustom\QSearchList.h" />
     <ClInclude Include="QtCustom\QTitleBar.h" />
+    <ClInclude Include="QtCustom\QDockTitle.h" />
+    <ClInclude Include="QtCustom\QDockWindow.h" />
+    <ClInclude Include="System\LibManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\update_ui.bat">

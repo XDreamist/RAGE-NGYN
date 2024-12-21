@@ -17,9 +17,9 @@ int main(int argc, char* argv[])
         }
     }
 
-    ConfigManager configManager;
+    ConfigManager& configManager = ConfigManager::getInstance();
 
-    MainWindow w(nullptr, configManager.findConfig());
+    MainWindow w(nullptr, configManager.isValid());
     w.show();
 
     return a.exec();
