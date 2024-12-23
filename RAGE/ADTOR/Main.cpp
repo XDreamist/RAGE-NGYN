@@ -1,6 +1,6 @@
-#include "QtCustom/QTriangleWindow.h"
+#include "UI/QtCustom/QTriangleWindow.h"
 
-#include "System/ConfigManager.h"
+#include "Managers/ConfigManager.h"
 #include "MainWindow.h"
 
 int main(int argc, char* argv[]) 

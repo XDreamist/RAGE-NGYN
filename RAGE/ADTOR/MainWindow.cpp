@@ -13,8 +13,6 @@
 
 #include <memory>
 
-#include "UI_Main.h"
-#include "UI_ProjectSelection.h"
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -104,7 +102,10 @@ QT_WARNING_POP
 
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
-#include "System/LibManager.h"
+#include "Managers/LibManager.h"
+
+#include "UI/Editor.h"
+#include "UI/ProjectSelection.h"
 
 MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), OpenRage(open_rage)
 {
@@ -114,7 +115,15 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), O
         ui_Rage = new Ui_RAGE;
         ui_Rage->setupUi(this);
 
-        LibManager facade("");
+        LibManager facade("BRIDGE.dll");
+        if (facade.load()) std::cout << "Yeay";
+        try {
+            int result = facade.callSomeFunction(42);
+            qDebug() << "Function result:" << result;
+        }
+        catch (const std::runtime_error& e) {
+            qDebug() << "Error:" << e.what();
+        }
         this->setMenuWidget(ui_Rage->TitleBar);
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
     }
