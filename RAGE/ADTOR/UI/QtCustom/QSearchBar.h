@@ -29,10 +29,9 @@ protected:
     void setupUI();
     void setupConnections();
 
-    void setSearchText(const QString& text = "");
     void activateSearch(bool activate);
+    void setSearchText(const QString& text = "");
 
-    void resizeEvent(QResizeEvent* event);
     bool eventFilter(QObject* watched, QEvent* event) override;
 
 private slots:

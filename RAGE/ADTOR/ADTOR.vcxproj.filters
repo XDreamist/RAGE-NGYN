@@ -3,45 +3,33 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="QtCustom\QTriangleWindow.h">
-      <Filter>QtCustom</Filter>
-    </ClCompile>
-    <ClCompile Include="System\ConfigManager.cpp">
+    <ClCompile Include="Managers\ConfigManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="QtCustom\QSearchBar.cpp">
-      <Filter>QtCustom</Filter>
-    </ClCompile>
-    <ClCompile Include="QtCustom\QSearchList.cpp" />
-    <ClCompile Include="QtCustom\QTitleBar.cpp" />
-    <ClCompile Include="QtCustom\QDockTitle.cpp" />
-    <ClCompile Include="QtCustom\QDockWindow.cpp" />
+    <ClCompile Include="UI\QtCustom\QDockTitle.cpp" />
+    <ClCompile Include="UI\QtCustom\QDockWindow.cpp" />
+    <ClCompile Include="UI\QtCustom\QSearchBar.cpp" />
+    <ClCompile Include="UI\QtCustom\QSearchList.cpp" />
+    <ClCompile Include="UI\QtCustom\QTitleBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="UI_Main.h" />
-    <ClInclude Include="UI_ProjectSelection.h" />
-    <ClInclude Include="System\ConfigManager.h">
+    <ClInclude Include="Managers\ConfigManager.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="QtCustom\QSearchBar.h">
-      <Filter>QtCustom</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="QtCustom\QSearchList.h" />
-    <ClInclude Include="QtCustom\QTitleBar.h" />
-    <ClInclude Include="QtCustom\QDockTitle.h" />
-    <ClInclude Include="QtCustom\QDockWindow.h" />
-    <ClInclude Include="System\LibManager.h" />
+    <ClInclude Include="Managers\LibManager.h" />
+    <ClInclude Include="UI\Editor.h" />
+    <ClInclude Include="UI\ProjectSelection.h" />
+    <ClInclude Include="UI\QtCustom\QDockTitle.h" />
+    <ClInclude Include="UI\QtCustom\QDockWindow.h" />
+    <ClInclude Include="UI\QtCustom\QSearchBar.h" />
+    <ClInclude Include="UI\QtCustom\QSearchList.h" />
+    <ClInclude Include="UI\QtCustom\QTitleBar.h" />
+    <ClInclude Include="UI\QtCustom\QTriangleWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ui\update_ui.bat">
-      <Filter>ui</Filter>
-    </None>
-    <None Include="ui\UI_Main.ui">
-      <Filter>ui</Filter>
-    </None>
-    <None Include="ui\UI_ProjectSelection.ui">
+    <None Include="UI\update_ui.bat">
       <Filter>ui</Filter>
     </None>
     <None Include="ui\Resources\Base.qrc" />
@@ -49,9 +37,6 @@
   <ItemGroup>
     <Filter Include="ui">
       <UniqueIdentifier>{7c57e61d-fa43-4ae1-b1ec-3c91dc8d5f98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="QtCustom">
-      <UniqueIdentifier>{01f6c088-8d2c-41ee-8f83-7a3e90ced004}</UniqueIdentifier>
     </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{e3738f83-68c6-4ae9-b661-e6652651eec9}</UniqueIdentifier>

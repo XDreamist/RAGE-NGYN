@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'UI_Main.ui'
+** Form generated from reading UI file 'Editor.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_MAIN_H
-#define UI_MAIN_H
+#ifndef EDITOR_H
+#define EDITOR_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
@@ -256,4 +256,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_MAIN_H
+#endif // EDITOR_H

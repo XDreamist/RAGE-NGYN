@@ -134,6 +134,7 @@ QT_WARNING_POP
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QApplication>
 #include "QSearchList.h"
+#include "../../Managers/ConfigManager.h"
 
 QSearchBar::QSearchBar(QWidget* parent)
     : QWidget(parent)
@@ -189,6 +190,8 @@ void QSearchBar::setupUI()
     )");
 
     // Initialize SearchList
+    ConfigManager& config = ConfigManager::getInstance();
+    setSearchText(config.getValue("Project Name", SearchText));
     SearchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
 
     SearchList = new QSearchList(SearchOptions, this);
@@ -261,15 +264,6 @@ void QSearchBar::activateSearch(bool activate)
 
 void QSearchBar::onButtonClicked() {
     activateSearch(true);
-}
-
-void QSearchBar::resizeEvent(QResizeEvent* event)
-{
-    QWidget::resizeEvent(event);
-
-    if (SearchLine) {
-        //SearchButton->setFixedWidth(SearchLine->width());
-    }
 }
 
 bool QSearchBar::eventFilter(QObject* object, QEvent* event)

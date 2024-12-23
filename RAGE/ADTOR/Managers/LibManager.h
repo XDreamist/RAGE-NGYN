@@ -6,19 +6,21 @@
 
 class LibManager {
 public:
-    LibManager(const QString& dllPath) {
-        library.setFileName(dllPath);
+    explicit LibManager(const QString& dllPath)
+        : library(dllPath) {}
+
+    bool load() {
         if (!library.load()) {
-            throw std::runtime_error("Failed to load DLL");
+            qDebug() << "Failed to load DLL:" << library.errorString();
+            return false;
         }
-        else {
-            std::cout << "Yeay!";
-        }
-        initFunctions();
+        return initFunctions();
     }
 
     ~LibManager() {
-        library.unload();
+        if (library.isLoaded()) {
+            library.unload();
+        }
     }
 
     int callSomeFunction(int param) {
@@ -35,10 +37,12 @@ private:
     typedef int (*SomeFunctionType)(int);
     SomeFunctionType someFunction = nullptr;
 
-    void initFunctions() {
+    bool initFunctions() {
         someFunction = reinterpret_cast<SomeFunctionType>(library.resolve("SomeFunction"));
         if (!someFunction) {
-            throw std::runtime_error("Failed to resolve SomeFunction");
+            qDebug() << "Failed to resolve SomeFunction";
+            return false;
         }
+        return true;
     }
 };

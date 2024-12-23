@@ -3,7 +3,6 @@
 
 #include "Component.h"
 
-
 namespace RAGE {
 
 #define INIT_INFO(component) namespace component { struct InitInfo; }

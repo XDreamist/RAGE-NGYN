@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'Ui_ProjectSelection.ui'
+** Form generated from reading UI file 'ProjectSelection.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_PROJECTSELECTION_H
-#define UI_PROJECTSELECTION_H
+#ifndef PROJECTSELECTION_H
+#define PROJECTSELECTION_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -56,4 +56,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_PROJECTSELECTION_H
+#endif // PROJECTSELECTION_H

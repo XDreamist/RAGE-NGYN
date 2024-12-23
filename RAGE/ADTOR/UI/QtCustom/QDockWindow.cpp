@@ -157,7 +157,7 @@ void QDockWindow::setupUI()
     this->setStyleSheet(QString::fromUtf8(
         "QDockWidget {\n"
         "   background-color: #222222;\n"
-        "   border: 5px solid transparent;\n"
+        "   border: 6px solid transparent;\n"
         "}\n"
         "QDockWidget > QWidget {\n"
         "   background-color: #222222;\n"
@@ -182,7 +182,7 @@ void QDockWindow::onFloatingChanged(bool floating) {
         this->setStyleSheet(QString::fromUtf8(
             "QDockWidget {\n"
             "   background-color: #222222;\n"
-            "   border: 5px solid transparent;\n"
+            "   border: 6px solid transparent;\n"
             "}\n"
             "QDockWidget > QWidget {\n"
             "   background-color: #222222;\n"
@@ -197,7 +197,7 @@ void QDockWindow::onFloatingChanged(bool floating) {
         this->setStyleSheet(QString::fromUtf8(
             "QDockWidget {\n"
             "   background-color: #222222;\n"
-            "   border: 5px solid transparent;\n"
+            "   border: 6px solid transparent;\n"
             "}\n"
             "QDockWidget > QWidget {\n"
             "   background-color: #222222;\n"
@@ -215,7 +215,7 @@ void QDockWindow::addDropShadow() {
     }
     ShadowEffect->setBlurRadius(30);
     ShadowEffect->setOffset(0, 5);
-    ShadowEffect->setColor(QColor(0, 0, 0, 60));
+    ShadowEffect->setColor(QColor(0, 0, 0, 40));
     this->widget()->setGraphicsEffect(ShadowEffect);
 }
 

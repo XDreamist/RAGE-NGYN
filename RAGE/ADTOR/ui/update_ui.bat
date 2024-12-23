@@ -2,8 +2,8 @@
 setlocal enabledelayedexpansion
 
 set UIC_PATH=H:\RAGE-NGYN\RAGE\bin\uic.exe
-set UI_DIR=H:\RAGE-NGYN\RAGE\ADTOR\ui
-set OUTPUT_DIR=H:\RAGE-NGYN\RAGE\ADTOR
+set UI_DIR=H:\RAGE-NGYN\RAGE\ADTOR\UI
+set OUTPUT_DIR=H:\RAGE-NGYN\RAGE\ADTOR\UI
 
 echo Updating UI...
 for %%f in (%UI_DIR%\*.ui) do (

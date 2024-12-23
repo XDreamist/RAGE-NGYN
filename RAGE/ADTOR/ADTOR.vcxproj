@@ -105,34 +105,32 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="QtCustom\QDockTitle.cpp" />
-    <ClCompile Include="QtCustom\QDockWindow.cpp" />
-    <ClCompile Include="QtCustom\QSearchBar.cpp" />
-    <ClCompile Include="QtCustom\QSearchList.cpp" />
-    <ClCompile Include="QtCustom\QTitleBar.cpp" />
-    <ClCompile Include="System\ConfigManager.cpp" />
+    <ClCompile Include="Managers\ConfigManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="QtCustom\QTriangleWindow.h" />
+    <ClCompile Include="UI\QtCustom\QDockTitle.cpp" />
+    <ClCompile Include="UI\QtCustom\QDockWindow.cpp" />
+    <ClCompile Include="UI\QtCustom\QSearchBar.cpp" />
+    <ClCompile Include="UI\QtCustom\QSearchList.cpp" />
+    <ClCompile Include="UI\QtCustom\QTitleBar.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="QtCustom\QDockTitle.h" />
-    <ClInclude Include="QtCustom\QDockWindow.h" />
-    <ClInclude Include="QtCustom\QSearchBar.h" />
-    <ClInclude Include="QtCustom\QSearchList.h" />
-    <ClInclude Include="QtCustom\QTitleBar.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="System\ConfigManager.h" />
+    <ClInclude Include="Managers\ConfigManager.h" />
     <ClInclude Include="MainWindow.h" />
-    <ClInclude Include="System\LibManager.h" />
-    <ClInclude Include="UI_Main.h" />
-    <ClInclude Include="UI_ProjectSelection.h" />
+    <ClInclude Include="Managers\LibManager.h" />
+    <ClInclude Include="UI\Editor.h" />
+    <ClInclude Include="UI\ProjectSelection.h" />
+    <ClInclude Include="UI\QtCustom\QDockTitle.h" />
+    <ClInclude Include="UI\QtCustom\QDockWindow.h" />
+    <ClInclude Include="UI\QtCustom\QSearchBar.h" />
+    <ClInclude Include="UI\QtCustom\QSearchList.h" />
+    <ClInclude Include="UI\QtCustom\QTitleBar.h" />
+    <ClInclude Include="UI\QtCustom\QTriangleWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\Resources\Base.qrc" />
-    <None Include="ui\UI_Main.ui" />
-    <None Include="ui\UI_ProjectSelection.ui" />
-    <None Include="ui\update_ui.bat" />
+    <None Include="UI\update_ui.bat" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ADTOR.rc" />
