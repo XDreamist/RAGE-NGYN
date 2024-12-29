@@ -135,6 +135,7 @@ QT_WARNING_POP
 #include <QtWidgets/QApplication>
 #include "QSearchList.h"
 #include "../../Managers/ConfigManager.h"
+#include "../../Utilities/Warning.h"
 
 QSearchBar::QSearchBar(QWidget* parent)
     : QWidget(parent)
@@ -146,7 +147,6 @@ QSearchBar::~QSearchBar() = default;
 
 void QSearchBar::setupUI()
 {
-    // Initialize search bar
     SearchButton = new QPushButton("Editor", this);
     SearchButton->setObjectName("SearchButton");
     QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Preferred);
@@ -189,9 +189,9 @@ void QSearchBar::setupUI()
         }
     )");
 
-    // Initialize SearchList
     ConfigManager& config = ConfigManager::getInstance();
     setSearchText(config.getValue("Project Name", SearchText));
+
     SearchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
 
     SearchList = new QSearchList(SearchOptions, this);
@@ -200,14 +200,12 @@ void QSearchBar::setupUI()
     SearchLine->setCompleter(SearchList);
     SearchPopup = SearchList->popup();
 
-    // Set up layout
     SBLayout = new QVBoxLayout(this);
     SBLayout->setContentsMargins(0, 5, 0, 0);
     SBLayout->setSpacing(0);
     SBLayout->addWidget(SearchButton);
     SBLayout->addWidget(SearchLine);
 
-    // Connect signals and events
     SearchLine->installEventFilter(this);
     SearchPopup->installEventFilter(this);
 
@@ -278,9 +276,10 @@ bool QSearchBar::eventFilter(QObject* object, QEvent* event)
         if (SearchLine->text().isEmpty()) {
             activateSearch(false);
         }
-        else if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion
-            // !!! FIX THIS !!!
-            /*|| SearchList->completionCount() < SearchOptions.length()*/) {
+        else if (SearchList->completionCount() == 1) {
+            RAGE_WARN(SearchLine->text().toStdString());
+        }
+        else if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion) {
             activateSearch(false);
         }
         else {
