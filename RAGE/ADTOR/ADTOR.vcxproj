@@ -115,6 +115,9 @@
     <ClCompile Include="UI\QtCustom\QTitleBar.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\Command.h" />
+    <ClInclude Include="Common\Block.h" />
+    <ClInclude Include="Components\Entity.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Managers\ConfigManager.h" />
     <ClInclude Include="MainWindow.h" />
@@ -127,6 +130,8 @@
     <ClInclude Include="UI\QtCustom\QSearchList.h" />
     <ClInclude Include="UI\QtCustom\QTitleBar.h" />
     <ClInclude Include="UI\QtCustom\QTriangleWindow.h" />
+    <ClInclude Include="Utilities\Logger.h" />
+    <ClInclude Include="Utilities\Warning.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ui\Resources\Base.qrc" />

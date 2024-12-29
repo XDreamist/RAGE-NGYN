@@ -3,4 +3,4 @@
 
 #include "Common.h"
 #include "Id.h"
-#include "..\NGYN API\GameEntity.h"
+#include "..\NGYN API\Entity.h"

@@ -2,7 +2,7 @@
 #pragma once
 
 #include "..\Components\Component.h"
-#include "TransformComponent.h"
+#include "Transform.h"
 
 namespace RAGE::Core {
 
@@ -11,16 +11,12 @@ namespace RAGE::Core {
 	class Entity
 	{
 	public:
-		// Constructors
 		constexpr explicit Entity(EntityID id) : id{ id } {}
 		constexpr Entity() : id{ ID::INVALID_ID } {}
 
-		// Accessors
 		constexpr EntityID getID() const { return id; }
 		constexpr bool isValid() const { return ID::isValid(id); }
 
-		// Retrieve the Transform component
-		// Ensure implementation exists in the corresponding .cpp file
 		Transform::Component transform() const;
 
 	private:

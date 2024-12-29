@@ -13,7 +13,7 @@ public:
 protected:
     bool OpenRage = false;
     class Ui_RAGE* ui_Rage = nullptr;
-    class Ui_ProjectSelection* ui_ProjectSelect = nullptr;
+    class Ui_ProjectSelector* ui_ProjectSelect = nullptr;
 
     void adjustButtonSize(const QSize& screenSize);
 };

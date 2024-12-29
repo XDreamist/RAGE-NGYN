@@ -12,46 +12,89 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_ProjectSelection
+class Ui_ProjectSelector
 {
 public:
     QWidget *centralwidget;
+    QVBoxLayout *verticalLayout;
+    QWidget *widget;
+    QWidget *widget_2;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QMainWindow *ProjectSelector)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
-        centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName("centralwidget");
+        if (ProjectSelector->objectName().isEmpty())
+            ProjectSelector->setObjectName("ProjectSelector");
+        ProjectSelector->resize(800, 600);
         QPalette palette;
-        QBrush brush(QColor(48, 48, 48, 255));
+        QBrush brush(QColor(211, 211, 211, 255));
         brush.setStyle(Qt::SolidPattern);
-        palette.setBrush(QPalette::Active, QPalette::Window, brush);
-        palette.setBrush(QPalette::Inactive, QPalette::Window, brush);
-        palette.setBrush(QPalette::Disabled, QPalette::Base, brush);
-        palette.setBrush(QPalette::Disabled, QPalette::Window, brush);
-        centralwidget->setPalette(palette);
-        MainWindow->setCentralWidget(centralwidget);
+        palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush1(QColor(25, 22, 29, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
+        QBrush brush2(QColor(211, 211, 211, 128));
+        brush2.setStyle(Qt::SolidPattern);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+#endif
+        palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+#endif
+        palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+#endif
+        ProjectSelector->setPalette(palette);
+        centralwidget = new QWidget(ProjectSelector);
+        centralwidget->setObjectName("centralwidget");
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName("verticalLayout");
+        widget = new QWidget(centralwidget);
+        widget->setObjectName("widget");
 
-        retranslateUi(MainWindow);
+        verticalLayout->addWidget(widget);
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        widget_2 = new QWidget(centralwidget);
+        widget_2->setObjectName("widget_2");
+
+        verticalLayout->addWidget(widget_2);
+
+        ProjectSelector->setCentralWidget(centralwidget);
+
+        retranslateUi(ProjectSelector);
+
+        QMetaObject::connectSlotsByName(ProjectSelector);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *ProjectSelector)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("ProjectSelection", "MainWindow", nullptr));
+        ProjectSelector->setWindowTitle(QCoreApplication::translate("ProjectSelector", "Project Selector", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class ProjectSelection: public Ui_ProjectSelection {};
+    class ProjectSelector: public Ui_ProjectSelector {};
 } // namespace Ui
 
 QT_END_NAMESPACE

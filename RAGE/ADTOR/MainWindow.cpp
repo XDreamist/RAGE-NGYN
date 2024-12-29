@@ -128,7 +128,7 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), O
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
     }
     else {
-        ui_ProjectSelect = new Ui_ProjectSelection;
+        ui_ProjectSelect = new Ui_ProjectSelector;
         ui_ProjectSelect->setupUi(this);
     }
 }

@@ -22,8 +22,8 @@
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Ntt.h" />
     <ClInclude Include="Components\Transform.h" />
-    <ClInclude Include="NGYN API\GameEntity.h" />
-    <ClInclude Include="NGYN API\TransformComponent.h" />
+    <ClInclude Include="NGYN API\Entity.h" />
+    <ClInclude Include="NGYN API\Transform.h" />
     <ClInclude Include="Utilities\Math.h" />
     <ClInclude Include="Utilities\Utils.h" />
   </ItemGroup>
