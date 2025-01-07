@@ -11,6 +11,7 @@
     <ClCompile Include="UI\QtCustom\QSearchBar.cpp" />
     <ClCompile Include="UI\QtCustom\QSearchList.cpp" />
     <ClCompile Include="UI\QtCustom\QTitleBar.cpp" />
+    <ClCompile Include="UI\QtCustom\QRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
@@ -19,7 +20,6 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Managers\LibManager.h" />
-    <ClInclude Include="UI\Editor.h" />
     <ClInclude Include="UI\ProjectSelection.h" />
     <ClInclude Include="UI\QtCustom\QDockTitle.h" />
     <ClInclude Include="UI\QtCustom\QDockWindow.h" />
@@ -32,6 +32,8 @@
     <ClInclude Include="Utilities\Logger.h" />
     <ClInclude Include="Common\Command.h" />
     <ClInclude Include="Utilities\Warning.h" />
+    <ClInclude Include="UI\Editor.h" />
+    <ClInclude Include="UI\QtCustom\QRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UI\update_ui.bat">

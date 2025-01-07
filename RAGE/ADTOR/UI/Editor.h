@@ -20,6 +20,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCustom/QDockWindow.h"
+#include "QtCustom/QRenderer.h"
 #include "QtCustom/QTitleBar.h"
 
 QT_BEGIN_NAMESPACE
@@ -37,6 +38,8 @@ public:
     QTextEdit *textEdit;
     QDockWidget *dockWidget_6;
     QWidget *dockWidgetContents_3;
+    QGridLayout *gridLayout;
+    QRenderer *openGLWidget;
     QDockWidget *dockWidget_7;
     QWidget *dockWidgetContents_7;
 
@@ -225,6 +228,13 @@ public:
         dockWidget_6->setObjectName("dockWidget_6");
         dockWidgetContents_3 = new QWidget();
         dockWidgetContents_3->setObjectName("dockWidgetContents_3");
+        gridLayout = new QGridLayout(dockWidgetContents_3);
+        gridLayout->setObjectName("gridLayout");
+        openGLWidget = new QRenderer(dockWidgetContents_3);
+        openGLWidget->setObjectName("openGLWidget");
+
+        gridLayout->addWidget(openGLWidget, 0, 0, 1, 1);
+
         dockWidget_6->setWidget(dockWidgetContents_3);
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_6);
         dockWidget_7 = new QDockWidget(RAGE);

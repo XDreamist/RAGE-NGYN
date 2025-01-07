@@ -70,7 +70,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)</AdditionalLibraryDirectories>
+      <ImportLibrary />
     </Link>
+    <PostBuildEvent>
+      <Command>del "$(OutDir)/*.lib"
+del "$(OutDir)/*.exp"
+del "$(OutDir)/*.pdb"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

@@ -71,7 +71,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalLibraryDirectories>H:\RAGE-NGYN\RAGE\dep\msvc2019_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;Qt6OpenGL.lib;Qt6OpenGLWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PreBuildEvent>
@@ -97,7 +97,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalLibraryDirectories>H:\RAGE-NGYN\RAGE\dep\msvc2019_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;Qt6OpenGL.lib;Qt6OpenGLWidgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PreBuildEvent>
@@ -110,6 +110,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="UI\QtCustom\QDockTitle.cpp" />
     <ClCompile Include="UI\QtCustom\QDockWindow.cpp" />
+    <ClCompile Include="UI\QtCustom\QRenderer.cpp" />
     <ClCompile Include="UI\QtCustom\QSearchBar.cpp" />
     <ClCompile Include="UI\QtCustom\QSearchList.cpp" />
     <ClCompile Include="UI\QtCustom\QTitleBar.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="UI\ProjectSelection.h" />
     <ClInclude Include="UI\QtCustom\QDockTitle.h" />
     <ClInclude Include="UI\QtCustom\QDockWindow.h" />
+    <ClInclude Include="UI\QtCustom\QRenderer.h" />
     <ClInclude Include="UI\QtCustom\QSearchBar.h" />
     <ClInclude Include="UI\QtCustom\QSearchList.h" />
     <ClInclude Include="UI\QtCustom\QTitleBar.h" />
