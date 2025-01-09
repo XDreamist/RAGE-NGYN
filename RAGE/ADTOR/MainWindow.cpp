@@ -102,6 +102,7 @@ QT_WARNING_POP
 
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
+#include <QtCore/QSettings>
 #include "Managers/LibManager.h"
 
 #include "UI/Editor.h"
@@ -126,6 +127,8 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), O
         }
         this->setMenuWidget(ui_Rage->TitleBar);
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
+
+        restoreWindow();
     }
     else {
         ui_ProjectSelect = new Ui_ProjectSelector;
@@ -135,8 +138,28 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), O
 
 MainWindow::~MainWindow()
 {
+    saveWindow();
+
     delete ui_Rage;
     delete ui_ProjectSelect;
+}
+
+void MainWindow::saveWindow()
+{
+    QSettings settings(app_name, setting_name);
+
+    // Save geometry and state
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
+}
+
+void MainWindow::restoreWindow()
+{
+    QSettings settings(app_name, setting_name);
+
+    // Restore geometry and state
+    restoreGeometry(settings.value("geometry").toByteArray());
+    restoreState(settings.value("windowState").toByteArray());
 }
 
 void MainWindow::adjustButtonSize(const QSize& screenSize)

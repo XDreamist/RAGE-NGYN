@@ -47,7 +47,7 @@ public:
     {
         if (RAGE->objectName().isEmpty())
             RAGE->setObjectName("RAGE");
-        RAGE->resize(787, 582);
+        RAGE->resize(1020, 616);
         QPalette palette;
         QBrush brush(QColor(211, 211, 211, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -219,6 +219,11 @@ public:
 
         textEdit = new QTextEdit(dockWidgetContents_2);
         textEdit->setObjectName("textEdit");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(textEdit->sizePolicy().hasHeightForWidth());
+        textEdit->setSizePolicy(sizePolicy1);
 
         verticalLayout->addWidget(textEdit);
 
@@ -226,12 +231,19 @@ public:
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_5);
         dockWidget_6 = new QDockWidget(RAGE);
         dockWidget_6->setObjectName("dockWidget_6");
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(dockWidget_6->sizePolicy().hasHeightForWidth());
+        dockWidget_6->setSizePolicy(sizePolicy2);
         dockWidgetContents_3 = new QWidget();
         dockWidgetContents_3->setObjectName("dockWidgetContents_3");
         gridLayout = new QGridLayout(dockWidgetContents_3);
         gridLayout->setObjectName("gridLayout");
         openGLWidget = new QRenderer(dockWidgetContents_3);
         openGLWidget->setObjectName("openGLWidget");
+        sizePolicy2.setHeightForWidth(openGLWidget->sizePolicy().hasHeightForWidth());
+        openGLWidget->setSizePolicy(sizePolicy2);
 
         gridLayout->addWidget(openGLWidget, 0, 0, 1, 1);
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>787</width>
-    <height>582</height>
+    <width>1020</width>
+    <height>616</height>
    </rect>
   </property>
   <property name="palette">
@@ -828,12 +828,25 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit"/>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
   </widget>
   <widget class="QDockWidget" name="dockWidget_6">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="windowTitle">
     <string>Viewport</string>
    </property>
@@ -843,7 +856,14 @@
    <widget class="QWidget" name="dockWidgetContents_3">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QRenderer" name="openGLWidget"/>
+      <widget class="QRenderer" name="openGLWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
