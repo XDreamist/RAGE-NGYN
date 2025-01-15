@@ -800,7 +800,7 @@
      <number>0</number>
     </property>
     <item row="2" column="0" alignment="Qt::AlignTop">
-     <widget class="QTitleBar" name="TitleBar" native="true">
+     <widget class="QTitleBar" name="titleBar" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
         <horstretch>0</horstretch>
@@ -811,36 +811,22 @@
     </item>
    </layout>
   </widget>
-  <widget class="QDockWindow" name="dockWidget_5">
+  <widget class="QDockWindow" name="browserDock">
    <property name="windowTitle">
-    <string>Heierarchy</string>
+    <string>File Explorer</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>4</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_2">
+   <widget class="QWidget" name="browserDockContent">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
+      <widget class="QMdiArea" name="mdiArea"/>
      </item>
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockWidget_6">
+  <widget class="QDockWindow" name="rendererDock">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -853,7 +839,7 @@
    <attribute name="dockWidgetArea">
     <number>4</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_3">
+   <widget class="QWidget" name="rendererDockContent">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QRenderer" name="openGLWidget">
@@ -868,14 +854,20 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockWidget_7">
+  <widget class="QDockWindow" name="hierarchyDock">
    <property name="windowTitle">
-    <string>Content Browser</string>
+    <string>Content Viewer</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>4</number>
    </attribute>
-   <widget class="QWidget" name="dockWidgetContents_7"/>
+   <widget class="QWidget" name="hierarchyDockContent">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QListWidget" name="listWidget"/>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <customwidgets>

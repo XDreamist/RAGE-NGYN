@@ -143,13 +143,13 @@ QT_WARNING_POP
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QGraphicsDropShadowEffect>
 
-QDockWindow::QDockWindow(QWidget* parent) : QDockWidget(parent), ShadowEffect(nullptr)
+QDockWindow::QDockWindow(QWidget* parent) : QDockWidget(parent), shadowEffect(nullptr)
 {
     setupUI();
 }
 
 QDockWindow::~QDockWindow() {
-    delete ShadowEffect;
+    delete shadowEffect;
 }
 
 void QDockWindow::setupUI()
@@ -160,12 +160,13 @@ void QDockWindow::setupUI()
         "   border: 6px solid transparent;\n"
         "}\n"
         "QDockWidget > QWidget {\n"
-        "   background-color: #222222;\n"
+        "   background-color: #151515;\n"
+        "   border: 10px solid #222222;\n"
         "   border-radius: 8px;\n"
         "   border-top-left-radius: 0px;\n"
         "}"));
 
-    DockTitle = new QDockTitle(this);
+    dockTitle = new QDockTitle(this);
 
     this->setAttribute(Qt::WA_TranslucentBackground);
 
@@ -190,7 +191,7 @@ void QDockWindow::onFloatingChanged(bool floating) {
             "   border-top-left-radius: 0px;\n"
             "   border-top-right-radius: 0px;\n"
             "}"));
-        DockTitle->expandTitle(true);
+        dockTitle->expandTitle(true);
         addDropShadow();
     }
     else {
@@ -205,21 +206,21 @@ void QDockWindow::onFloatingChanged(bool floating) {
             "   border-top-left-radius: 0px;\n"
             "}"));
         removeDropShadow();
-        DockTitle->expandTitle(false);
+        dockTitle->expandTitle(false);
     }
 }
 
 void QDockWindow::addDropShadow() {
-    if (!ShadowEffect) {
-        ShadowEffect = new QGraphicsDropShadowEffect(this->topLevelWidget());
+    if (!shadowEffect) {
+        shadowEffect = new QGraphicsDropShadowEffect(this->topLevelWidget());
     }
-    ShadowEffect->setBlurRadius(30);
-    ShadowEffect->setOffset(0, 5);
-    ShadowEffect->setColor(QColor(0, 0, 0, 40));
-    this->widget()->setGraphicsEffect(ShadowEffect);
+    shadowEffect->setBlurRadius(30);
+    shadowEffect->setOffset(0, 5);
+    shadowEffect->setColor(QColor(0, 0, 0, 40));
+    this->widget()->setGraphicsEffect(shadowEffect);
 }
 
 void QDockWindow::removeDropShadow() {
-    delete ShadowEffect;
-    ShadowEffect = nullptr;
+    delete shadowEffect;
+    shadowEffect = nullptr;
 }

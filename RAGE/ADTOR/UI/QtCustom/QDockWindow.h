@@ -11,8 +11,8 @@ public:
     ~QDockWindow();
 
 protected:
-    class QDockTitle* DockTitle = nullptr;
-    class QGraphicsDropShadowEffect* ShadowEffect = nullptr;
+    class QDockTitle* dockTitle = nullptr;
+    class QGraphicsDropShadowEffect* shadowEffect = nullptr;
 
     void setupUI();
     void setupConnections();

@@ -12,11 +12,10 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QMdiArea>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCustom/QDockWindow.h"
@@ -30,18 +29,19 @@ class Ui_RAGE
 public:
     QWidget *centralwidget;
     QGridLayout *CentralLayout;
-    QTitleBar *TitleBar;
-    QDockWindow *dockWidget_5;
-    QWidget *dockWidgetContents_2;
+    QTitleBar *titleBar;
+    QDockWindow *browserDock;
+    QWidget *browserDockContent;
     QVBoxLayout *verticalLayout;
-    QPushButton *pushButton;
-    QTextEdit *textEdit;
-    QDockWidget *dockWidget_6;
-    QWidget *dockWidgetContents_3;
+    QMdiArea *mdiArea;
+    QDockWindow *rendererDock;
+    QWidget *rendererDockContent;
     QGridLayout *gridLayout;
     QRenderer *openGLWidget;
-    QDockWidget *dockWidget_7;
-    QWidget *dockWidgetContents_7;
+    QDockWindow *hierarchyDock;
+    QWidget *hierarchyDockContent;
+    QGridLayout *gridLayout_2;
+    QListWidget *listWidget;
 
     void setupUi(QMainWindow *RAGE)
     {
@@ -195,66 +195,63 @@ public:
         CentralLayout->setSpacing(0);
         CentralLayout->setObjectName("CentralLayout");
         CentralLayout->setContentsMargins(0, 0, 0, 0);
-        TitleBar = new QTitleBar(centralwidget);
-        TitleBar->setObjectName("TitleBar");
+        titleBar = new QTitleBar(centralwidget);
+        titleBar->setObjectName("titleBar");
         QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(TitleBar->sizePolicy().hasHeightForWidth());
-        TitleBar->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(titleBar->sizePolicy().hasHeightForWidth());
+        titleBar->setSizePolicy(sizePolicy);
 
-        CentralLayout->addWidget(TitleBar, 2, 0, 1, 1, Qt::AlignTop);
+        CentralLayout->addWidget(titleBar, 2, 0, 1, 1, Qt::AlignTop);
 
         RAGE->setCentralWidget(centralwidget);
-        dockWidget_5 = new QDockWindow(RAGE);
-        dockWidget_5->setObjectName("dockWidget_5");
-        dockWidgetContents_2 = new QWidget();
-        dockWidgetContents_2->setObjectName("dockWidgetContents_2");
-        verticalLayout = new QVBoxLayout(dockWidgetContents_2);
+        browserDock = new QDockWindow(RAGE);
+        browserDock->setObjectName("browserDock");
+        browserDockContent = new QWidget();
+        browserDockContent->setObjectName("browserDockContent");
+        verticalLayout = new QVBoxLayout(browserDockContent);
         verticalLayout->setObjectName("verticalLayout");
-        pushButton = new QPushButton(dockWidgetContents_2);
-        pushButton->setObjectName("pushButton");
+        mdiArea = new QMdiArea(browserDockContent);
+        mdiArea->setObjectName("mdiArea");
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(mdiArea);
 
-        textEdit = new QTextEdit(dockWidgetContents_2);
-        textEdit->setObjectName("textEdit");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        browserDock->setWidget(browserDockContent);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, browserDock);
+        rendererDock = new QDockWindow(RAGE);
+        rendererDock->setObjectName("rendererDock");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(textEdit->sizePolicy().hasHeightForWidth());
-        textEdit->setSizePolicy(sizePolicy1);
-
-        verticalLayout->addWidget(textEdit);
-
-        dockWidget_5->setWidget(dockWidgetContents_2);
-        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_5);
-        dockWidget_6 = new QDockWidget(RAGE);
-        dockWidget_6->setObjectName("dockWidget_6");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(dockWidget_6->sizePolicy().hasHeightForWidth());
-        dockWidget_6->setSizePolicy(sizePolicy2);
-        dockWidgetContents_3 = new QWidget();
-        dockWidgetContents_3->setObjectName("dockWidgetContents_3");
-        gridLayout = new QGridLayout(dockWidgetContents_3);
+        sizePolicy1.setHeightForWidth(rendererDock->sizePolicy().hasHeightForWidth());
+        rendererDock->setSizePolicy(sizePolicy1);
+        rendererDockContent = new QWidget();
+        rendererDockContent->setObjectName("rendererDockContent");
+        gridLayout = new QGridLayout(rendererDockContent);
         gridLayout->setObjectName("gridLayout");
-        openGLWidget = new QRenderer(dockWidgetContents_3);
+        openGLWidget = new QRenderer(rendererDockContent);
         openGLWidget->setObjectName("openGLWidget");
-        sizePolicy2.setHeightForWidth(openGLWidget->sizePolicy().hasHeightForWidth());
-        openGLWidget->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(openGLWidget->sizePolicy().hasHeightForWidth());
+        openGLWidget->setSizePolicy(sizePolicy1);
 
         gridLayout->addWidget(openGLWidget, 0, 0, 1, 1);
 
-        dockWidget_6->setWidget(dockWidgetContents_3);
-        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_6);
-        dockWidget_7 = new QDockWidget(RAGE);
-        dockWidget_7->setObjectName("dockWidget_7");
-        dockWidgetContents_7 = new QWidget();
-        dockWidgetContents_7->setObjectName("dockWidgetContents_7");
-        dockWidget_7->setWidget(dockWidgetContents_7);
-        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, dockWidget_7);
+        rendererDock->setWidget(rendererDockContent);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, rendererDock);
+        hierarchyDock = new QDockWindow(RAGE);
+        hierarchyDock->setObjectName("hierarchyDock");
+        hierarchyDockContent = new QWidget();
+        hierarchyDockContent->setObjectName("hierarchyDockContent");
+        gridLayout_2 = new QGridLayout(hierarchyDockContent);
+        gridLayout_2->setObjectName("gridLayout_2");
+        listWidget = new QListWidget(hierarchyDockContent);
+        listWidget->setObjectName("listWidget");
+
+        gridLayout_2->addWidget(listWidget, 0, 0, 1, 1);
+
+        hierarchyDock->setWidget(hierarchyDockContent);
+        RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, hierarchyDock);
 
         retranslateUi(RAGE);
 
@@ -264,10 +261,9 @@ public:
     void retranslateUi(QMainWindow *RAGE)
     {
         RAGE->setWindowTitle(QCoreApplication::translate("RAGE", "RAGE", nullptr));
-        dockWidget_5->setWindowTitle(QCoreApplication::translate("RAGE", "Heierarchy", nullptr));
-        pushButton->setText(QCoreApplication::translate("RAGE", "PushButton", nullptr));
-        dockWidget_6->setWindowTitle(QCoreApplication::translate("RAGE", "Viewport", nullptr));
-        dockWidget_7->setWindowTitle(QCoreApplication::translate("RAGE", "Content Browser", nullptr));
+        browserDock->setWindowTitle(QCoreApplication::translate("RAGE", "File Explorer", nullptr));
+        rendererDock->setWindowTitle(QCoreApplication::translate("RAGE", "Viewport", nullptr));
+        hierarchyDock->setWindowTitle(QCoreApplication::translate("RAGE", "Content Viewer", nullptr));
     } // retranslateUi
 
 };

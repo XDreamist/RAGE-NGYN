@@ -108,11 +108,13 @@ QT_WARNING_POP
 #include "UI/Editor.h"
 #include "UI/ProjectSelection.h"
 
-MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), OpenRage(open_rage)
+#include <QtWidgets/QPushButton>
+
+MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), openRage(open_rage)
 {
     this->setWindowFlag(Qt::Window);
     //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    if (OpenRage) {
+    if (openRage) {
         ui_Rage = new Ui_RAGE;
         ui_Rage->setupUi(this);
 
@@ -125,7 +127,8 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), O
         catch (const std::runtime_error& e) {
             qDebug() << "Error:" << e.what();
         }
-        this->setMenuWidget(ui_Rage->TitleBar);
+        this->setMenuWidget(ui_Rage->titleBar);
+        connect(ui_Rage->titleBar->RAGE_Logo, &QPushButton::clicked, this, &MainWindow::resetWindow);
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
 
         restoreWindow();
@@ -160,6 +163,15 @@ void MainWindow::restoreWindow()
     // Restore geometry and state
     restoreGeometry(settings.value("geometry").toByteArray());
     restoreState(settings.value("windowState").toByteArray());
+}
+
+void MainWindow::resetWindow()
+{
+    QSettings settings(app_name, setting_name);
+
+    // Reset window dock and state
+    settings.clear();
+    setWindowState(Qt::WindowNoState);
 }
 
 void MainWindow::adjustButtonSize(const QSize& screenSize)

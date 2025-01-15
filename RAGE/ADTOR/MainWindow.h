@@ -11,7 +11,7 @@ public:
     ~MainWindow();
 
 protected:
-    bool OpenRage = false;
+    bool openRage = false;
     class Ui_RAGE* ui_Rage = nullptr;
     class Ui_ProjectSelector* ui_ProjectSelect = nullptr;
 
@@ -20,6 +20,7 @@ protected:
 
     void saveWindow();
     void restoreWindow();
+    void resetWindow();
 
     void adjustButtonSize(const QSize& screenSize);
 };

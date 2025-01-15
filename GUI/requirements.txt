@@ -1,5 +1,0 @@
-pyqt6-tools
-watchdog
-
-
-#python==3.9.13
