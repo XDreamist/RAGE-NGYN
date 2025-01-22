@@ -13,9 +13,11 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMdiArea>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCustom/QDockWindow.h"
@@ -33,7 +35,7 @@ public:
     QDockWindow *browserDock;
     QWidget *browserDockContent;
     QVBoxLayout *verticalLayout;
-    QMdiArea *mdiArea;
+    QListView *listView;
     QDockWindow *rendererDock;
     QWidget *rendererDockContent;
     QGridLayout *gridLayout;
@@ -42,6 +44,9 @@ public:
     QWidget *hierarchyDockContent;
     QGridLayout *gridLayout_2;
     QListWidget *listWidget;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *addObjButton;
 
     void setupUi(QMainWindow *RAGE)
     {
@@ -52,130 +57,43 @@ public:
         QBrush brush(QColor(211, 211, 211, 255));
         brush.setStyle(Qt::SolidPattern);
         palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        QBrush brush1(QColor(25, 22, 29, 255));
+        QBrush brush1(QColor(34, 34, 34, 255));
         brush1.setStyle(Qt::SolidPattern);
         palette.setBrush(QPalette::Active, QPalette::Button, brush1);
         palette.setBrush(QPalette::Active, QPalette::Text, brush);
         palette.setBrush(QPalette::Active, QPalette::ButtonText, brush);
-        palette.setBrush(QPalette::Active, QPalette::Base, brush1);
-        palette.setBrush(QPalette::Active, QPalette::Window, brush1);
-        QBrush brush2(QColor(211, 211, 211, 128));
+        QBrush brush2(QColor(21, 21, 21, 255));
         brush2.setStyle(Qt::SolidPattern);
+        palette.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette.setBrush(QPalette::Active, QPalette::Window, brush2);
+        QBrush brush3(QColor(211, 211, 211, 128));
+        brush3.setStyle(Qt::SolidPattern);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
+        palette.setBrush(QPalette::Active, QPalette::PlaceholderText, brush3);
 #endif
         palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
         palette.setBrush(QPalette::Inactive, QPalette::Button, brush1);
         palette.setBrush(QPalette::Inactive, QPalette::Text, brush);
         palette.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
-        palette.setBrush(QPalette::Inactive, QPalette::Base, brush1);
-        palette.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette.setBrush(QPalette::Inactive, QPalette::Window, brush2);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
+        palette.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush3);
 #endif
         palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
         palette.setBrush(QPalette::Disabled, QPalette::Button, brush1);
         palette.setBrush(QPalette::Disabled, QPalette::Text, brush);
         palette.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
-        palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
-        palette.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        palette.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette.setBrush(QPalette::Disabled, QPalette::Window, brush2);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
+        palette.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush3);
 #endif
         RAGE->setPalette(palette);
         QIcon icon;
         icon.addFile(QString::fromUtf8("res/Logo/RAGE.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         RAGE->setWindowIcon(icon);
         RAGE->setDockNestingEnabled(true);
-        QPalette palette1;
-        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        QBrush brush3(QColor(34, 34, 34, 255));
-        brush3.setStyle(Qt::SolidPattern);
-        palette1.setBrush(QPalette::Active, QPalette::Button, brush3);
-        palette1.setBrush(QPalette::Active, QPalette::Text, brush);
-        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush);
-        palette1.setBrush(QPalette::Active, QPalette::Base, brush3);
-        palette1.setBrush(QPalette::Active, QPalette::Window, brush3);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
-#endif
-        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush3);
-        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush);
-        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
-        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush3);
-        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush3);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
-#endif
-        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
-        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush3);
-        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush);
-        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
-        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush3);
-        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush3);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
-#endif
-        RAGE->setProperty("DarkTheme", QVariant(palette1));
-        QPalette palette2;
-        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush1);
-        palette2.setBrush(QPalette::Active, QPalette::Text, brush1);
-        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush1);
-        palette2.setBrush(QPalette::Active, QPalette::ToolTipText, brush1);
-        QBrush brush4(QColor(25, 22, 29, 128));
-        brush4.setStyle(Qt::SolidPattern);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette2.setBrush(QPalette::Active, QPalette::PlaceholderText, brush4);
-#endif
-        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush1);
-        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush1);
-        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush1);
-        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette2.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush4);
-#endif
-        QBrush brush5(QColor(120, 120, 120, 255));
-        brush5.setStyle(Qt::SolidPattern);
-        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush5);
-        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush5);
-        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush5);
-        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush1);
-        QBrush brush6(QColor(0, 0, 0, 128));
-        brush6.setStyle(Qt::SolidPattern);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette2.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush6);
-#endif
-        RAGE->setProperty("LightTheme", QVariant(palette2));
-        QPalette palette3;
-        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush);
-        palette3.setBrush(QPalette::Active, QPalette::Button, brush1);
-        palette3.setBrush(QPalette::Active, QPalette::Text, brush);
-        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush);
-        palette3.setBrush(QPalette::Active, QPalette::Base, brush1);
-        palette3.setBrush(QPalette::Active, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette3.setBrush(QPalette::Active, QPalette::PlaceholderText, brush2);
-#endif
-        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
-        palette3.setBrush(QPalette::Inactive, QPalette::Button, brush1);
-        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
-        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
-        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush1);
-        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette3.setBrush(QPalette::Inactive, QPalette::PlaceholderText, brush2);
-#endif
-        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush);
-        palette3.setBrush(QPalette::Disabled, QPalette::Button, brush1);
-        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush);
-        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush);
-        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush1);
-        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette3.setBrush(QPalette::Disabled, QPalette::PlaceholderText, brush2);
-#endif
-        RAGE->setProperty("RageTheme", QVariant(palette3));
         centralwidget = new QWidget(RAGE);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setProperty("RageLogo", QVariant(icon));
@@ -212,10 +130,11 @@ public:
         browserDockContent->setObjectName("browserDockContent");
         verticalLayout = new QVBoxLayout(browserDockContent);
         verticalLayout->setObjectName("verticalLayout");
-        mdiArea = new QMdiArea(browserDockContent);
-        mdiArea->setObjectName("mdiArea");
+        listView = new QListView(browserDockContent);
+        listView->setObjectName("listView");
+        listView->setViewMode(QListView::IconMode);
 
-        verticalLayout->addWidget(mdiArea);
+        verticalLayout->addWidget(listView);
 
         browserDock->setWidget(browserDockContent);
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, browserDock);
@@ -248,7 +167,19 @@ public:
         listWidget = new QListWidget(hierarchyDockContent);
         listWidget->setObjectName("listWidget");
 
-        gridLayout_2->addWidget(listWidget, 0, 0, 1, 1);
+        gridLayout_2->addWidget(listWidget, 1, 0, 1, 1);
+
+        widget = new QWidget(hierarchyDockContent);
+        widget->setObjectName("widget");
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        addObjButton = new QPushButton(widget);
+        addObjButton->setObjectName("addObjButton");
+
+        horizontalLayout->addWidget(addObjButton);
+
+
+        gridLayout_2->addWidget(widget, 0, 0, 1, 1);
 
         hierarchyDock->setWidget(hierarchyDockContent);
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, hierarchyDock);
@@ -264,6 +195,7 @@ public:
         browserDock->setWindowTitle(QCoreApplication::translate("RAGE", "File Explorer", nullptr));
         rendererDock->setWindowTitle(QCoreApplication::translate("RAGE", "Viewport", nullptr));
         hierarchyDock->setWindowTitle(QCoreApplication::translate("RAGE", "Content Viewer", nullptr));
+        addObjButton->setText(QCoreApplication::translate("RAGE", "Add", nullptr));
     } // retranslateUi
 
 };

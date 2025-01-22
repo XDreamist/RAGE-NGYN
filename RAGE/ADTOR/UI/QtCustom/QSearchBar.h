@@ -12,19 +12,19 @@ public:
     ~QSearchBar();
 
 public:
-    class QPushButton* SearchButton = nullptr;
-    class QLineEdit* SearchLine = nullptr;
-    class QSearchList* SearchList = nullptr;
-    class QAbstractItemView* SearchPopup = nullptr;
+    class QPushButton* searchButton = nullptr;
+    class QLineEdit* searchLine = nullptr;
+    class QSearchList* searchList = nullptr;
+    class QAbstractItemView* searchPopup = nullptr;
 
-    int MaxVisibleItems = 10;
+    int maxVisibleItems = 10;
 
 protected:
-    class QVBoxLayout* SBLayout = nullptr;
+    class QVBoxLayout* sbLayout = nullptr;
 
-    bool SearchActivated = false;
-    QString SearchText = "Editor";
-    QStringList SearchOptions;
+    bool searchActivated = false;
+    QString searchText = "Editor";
+    QStringList searchOptions;
 
     void setupUI();
     void setupConnections();

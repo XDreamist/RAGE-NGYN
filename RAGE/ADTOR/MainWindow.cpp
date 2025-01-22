@@ -109,6 +109,8 @@ QT_WARNING_POP
 #include "UI/ProjectSelection.h"
 
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QFileSystemModel.h>
+#include <QtCore/QDir>
 
 MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), openRage(open_rage)
 {
@@ -129,6 +131,11 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), o
         }
         this->setMenuWidget(ui_Rage->titleBar);
         connect(ui_Rage->titleBar->RAGE_Logo, &QPushButton::clicked, this, &MainWindow::resetWindow);
+        ui_Rage->listWidget->addItem("Cube");
+        QFileSystemModel* model = new QFileSystemModel;
+        model->setRootPath(QDir::currentPath());
+        ui_Rage->listView->setModel(model);
+        ui_Rage->listView->setRootIndex(model->index(QDir::currentPath()));
         //adjustButtonSize(QGuiApplication::primaryScreen()->size());
 
         restoreWindow();

@@ -147,14 +147,14 @@ QSearchBar::~QSearchBar() = default;
 
 void QSearchBar::setupUI()
 {
-    SearchButton = new QPushButton("Editor", this);
-    SearchButton->setObjectName("SearchButton");
+    searchButton = new QPushButton("Editor", this);
+    searchButton->setObjectName("searchButton");
     QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Preferred);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(SearchButton->sizePolicy().hasHeightForWidth());
-    SearchButton->setSizePolicy(sizePolicy);
-    SearchButton->setStyleSheet(R"(
+    sizePolicy.setHeightForWidth(searchButton->sizePolicy().hasHeightForWidth());
+    searchButton->setSizePolicy(sizePolicy);
+    searchButton->setStyleSheet(R"(
         QPushButton {
             background-color: #2E2E2E;
             color: #D3D3D3;
@@ -164,12 +164,12 @@ void QSearchBar::setupUI()
             margin: 1px 0px;
         }
     )");
-    SearchButton->setCursor(Qt::IBeamCursor);
+    searchButton->setCursor(Qt::IBeamCursor);
 
-    SearchLine = new QLineEdit(this);
-    SearchLine->setObjectName("SearchBar");
-    SearchLine->setPlaceholderText("Type to search...");
-    SearchLine->setStyleSheet(R"(
+    searchLine = new QLineEdit(this);
+    searchLine->setObjectName("SearchBar");
+    searchLine->setPlaceholderText("Type to search...");
+    searchLine->setStyleSheet(R"(
         QLineEdit {
             background-color: #2E2E2E;
             color: #D3D3D3;
@@ -190,39 +190,39 @@ void QSearchBar::setupUI()
     )");
 
     ConfigManager& config = ConfigManager::getInstance();
-    setSearchText(config.getValue("Project Name", SearchText));
+    setSearchText(config.getValue("Project Name", searchText));
 
-    SearchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
+    searchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
 
-    SearchList = new QSearchList(SearchOptions, this);
-    SearchList->setMaxVisibleItems(MaxVisibleItems);
+    searchList = new QSearchList(searchOptions, this);
+    searchList->setMaxVisibleItems(maxVisibleItems);
 
-    SearchLine->setCompleter(SearchList);
-    SearchPopup = SearchList->popup();
+    searchLine->setCompleter(searchList);
+    searchPopup = searchList->popup();
 
-    SBLayout = new QVBoxLayout(this);
-    SBLayout->setContentsMargins(0, 5, 0, 0);
-    SBLayout->setSpacing(0);
-    SBLayout->addWidget(SearchButton);
-    SBLayout->addWidget(SearchLine);
+    sbLayout = new QVBoxLayout(this);
+    sbLayout->setContentsMargins(0, 5, 0, 0);
+    sbLayout->setSpacing(0);
+    sbLayout->addWidget(searchButton);
+    sbLayout->addWidget(searchLine);
 
-    SearchLine->installEventFilter(this);
-    SearchPopup->installEventFilter(this);
+    searchLine->installEventFilter(this);
+    searchPopup->installEventFilter(this);
 
     setupConnections();
 }
 
 void QSearchBar::setupConnections()
 {
-    connect(SearchButton, &QPushButton::clicked, this, &QSearchBar::onButtonClicked);
+    connect(searchButton, &QPushButton::clicked, this, &QSearchBar::onButtonClicked);
     
-    connect(SearchList, QOverload<const QString&>::of(&QCompleter::highlighted),
+    connect(searchList, QOverload<const QString&>::of(&QCompleter::highlighted),
         this, [this](const QString& text) {
             setSearchText(text);
             activateSearch(false);
         });
 
-    //connect(SearchList, QOverload<const QModelIndex&>::of(&QCompleter::activated),
+    //connect(searchList, QOverload<const QModelIndex&>::of(&QCompleter::activated),
     //    this, [this](const QModelIndex& index) {
     //        qDebug() << "Completer activated index:" << index.row();
     //    });
@@ -230,33 +230,33 @@ void QSearchBar::setupConnections()
 
 void QSearchBar::setSearchText(const QString& text)
 {
-    if (!text.isEmpty()) SearchText = text;
-    if (SearchButton) SearchButton->setText(SearchText);
+    if (!text.isEmpty()) searchText = text;
+    if (searchButton) searchButton->setText(searchText);
 }
 
 void QSearchBar::activateSearch(bool activate)
 {
     if (activate) {
-        SearchButton->hide();
+        searchButton->hide();
 
-        SearchLine->show();
-        SearchLine->setFocus();
+        searchLine->show();
+        searchLine->setFocus();
 
         //SearchListAnim->setStartValue(startRect);
         //SearchListAnim->setEndValue(endRect);
 
-        SearchList->complete();
+        searchList->complete();
         //SearchListAnim->start();
     }
     else {
-        SearchLine->clear();
+        searchLine->clear();
 
-        if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion) SearchList->setCompletionMode(QCompleter::PopupCompletion);
-        SearchList->setCompletionPrefix("");
+        if (searchList->completionMode() == QCompleter::UnfilteredPopupCompletion) searchList->setCompletionMode(QCompleter::PopupCompletion);
+        searchList->setCompletionPrefix("");
 
-        SearchLine->hide();
+        searchLine->hide();
 
-        SearchButton->show();
+        searchButton->show();
     }
 }
 
@@ -268,22 +268,22 @@ bool QSearchBar::eventFilter(QObject* object, QEvent* event)
 {
     qDebug() << object << " : " << event->type();
 
-    if (object == SearchLine && event->type() == QEvent::MetaCall) {
+    if (object == searchLine && event->type() == QEvent::MetaCall) {
         activateSearch(false);
     }
 
-    if (object == SearchPopup && event->type() == QEvent::Hide) {
-        if (SearchLine->text().isEmpty()) {
+    if (object == searchPopup && event->type() == QEvent::Hide) {
+        if (searchLine->text().isEmpty()) {
             activateSearch(false);
         }
-        else if (SearchList->completionCount() == 1) {
-            RAGE_WARN(SearchLine->text().toStdString());
+        else if (searchList->completionCount() == 1) {
+            RAGE_WARN(searchLine->text().toStdString());
         }
-        else if (SearchList->completionMode() == QCompleter::UnfilteredPopupCompletion) {
+        else if (searchList->completionMode() == QCompleter::UnfilteredPopupCompletion) {
             activateSearch(false);
         }
         else {
-            SearchList->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+            searchList->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
         }
     }
     return QWidget::eventFilter(object, event);
