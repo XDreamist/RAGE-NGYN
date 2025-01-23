@@ -116,6 +116,20 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), o
 {
     this->setWindowFlag(Qt::Window);
     //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+    setupUI();
+}
+
+MainWindow::~MainWindow()
+{
+    if (shouldSaveState) saveWindow();
+
+    delete ui_Rage;
+    delete ui_ProjectSelect;
+}
+
+void MainWindow::setupUI()
+{
     if (openRage) {
         ui_Rage = new Ui_RAGE;
         ui_Rage->setupUi(this);
@@ -130,7 +144,7 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), o
             qDebug() << "Error:" << e.what();
         }
         this->setMenuWidget(ui_Rage->titleBar);
-        connect(ui_Rage->titleBar->RAGE_Logo, &QPushButton::clicked, this, &MainWindow::resetWindow);
+        connect(ui_Rage->titleBar->rageButton, &QPushButton::clicked, this, &MainWindow::resetWindow);
         ui_Rage->listWidget->addItem("Cube");
         QFileSystemModel* model = new QFileSystemModel;
         model->setRootPath(QDir::currentPath());
@@ -144,14 +158,6 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), o
         ui_ProjectSelect = new Ui_ProjectSelector;
         ui_ProjectSelect->setupUi(this);
     }
-}
-
-MainWindow::~MainWindow()
-{
-    saveWindow();
-
-    delete ui_Rage;
-    delete ui_ProjectSelect;
 }
 
 void MainWindow::saveWindow()
@@ -179,6 +185,8 @@ void MainWindow::resetWindow()
     // Reset window dock and state
     settings.clear();
     setWindowState(Qt::WindowNoState);
+
+    shouldSaveState = false;
 }
 
 void MainWindow::adjustButtonSize(const QSize& screenSize)

@@ -10,26 +10,26 @@ public:
 
     ~QTitleBar();
 
-    class QPushButton* RAGE_Logo = nullptr;
-    class QSearchBar* SearchBar = nullptr;
-    class QWidget* ControlContainer = nullptr;
-    class QPushButton* MinimizeButton = nullptr;
-    class QPushButton* MaximizeButton = nullptr;
-    class QPushButton* CloseButton = nullptr;
+    class QPushButton* rageButton = nullptr;
+    class QSearchBar* searchBar = nullptr;
+    class QWidget* controlContainer = nullptr;
+    class QPushButton* minimizeButton = nullptr;
+    class QPushButton* maximizeButton = nullptr;
+    class QPushButton* closeButton = nullptr;
 
 protected:
-    class QHBoxLayout* TitleLayout = nullptr;
-    class QSpacerItem* HRSpacer1 = nullptr;
-    class QSpacerItem* HRSpacer2 = nullptr;
-    class QHBoxLayout* ControlLayout = nullptr;
+    class QHBoxLayout* titleLayout = nullptr;
+    class QSpacerItem* hrSpacer1 = nullptr;
+    class QSpacerItem* hrSpacer2 = nullptr;
+    class QHBoxLayout* controlLayout = nullptr;
 
     bool isDragging;
-    QPoint dragStartPosition;
-    QIcon RageIcon;
-    QIcon MinusIcon;
-    QIcon MaximIcon;
-    QIcon MinimIcon;
-    QIcon CloseIcon;
+    QPoint initialDragPosition;
+    QIcon rageIcon;
+    QIcon minusIcon;
+    QIcon maximIcon;
+    QIcon minimIcon;
+    QIcon closeIcon;
 
     void setupUI();
     void setupConnections();

@@ -143,9 +143,12 @@ QT_WARNING_POP
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QGraphicsDropShadowEffect>
 
-QDockWindow::QDockWindow(QWidget* parent) : QDockWidget(parent), shadowEffect(nullptr)
+QDockWindow::QDockWindow(QWidget* parent)
+    : QDockWidget(parent),
+    shadowEffect(nullptr)
 {
     setupUI();
+    setupConnections();
 }
 
 QDockWindow::~QDockWindow() {
@@ -167,10 +170,9 @@ void QDockWindow::setupUI()
         "}"));
 
     dockTitle = new QDockTitle(this);
+    setTitleBarWidget(dockTitle);
 
     this->setAttribute(Qt::WA_TranslucentBackground);
-
-    setupConnections();
 }
 
 void QDockWindow::setupConnections()

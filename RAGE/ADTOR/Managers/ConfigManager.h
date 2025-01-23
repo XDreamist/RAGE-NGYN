@@ -27,7 +27,7 @@ private:
     bool findConfig();
 
     QString configFilePath = QDir::currentPath() + "/config.ini";
-    QString projectNameKey = "Project Name";
+    QString projectNameKey = "ProjectName";
     std::unique_ptr<QSettings> settings;
 
 protected:

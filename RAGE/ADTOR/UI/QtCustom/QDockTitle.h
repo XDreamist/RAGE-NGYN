@@ -13,12 +13,12 @@ public:
     void expandTitle(bool expand);
 
 protected:
-    class QDockWidget* DockWidget = nullptr;
-    class QLabel* TitleLabel = nullptr;
-    class QWidget* StretchWidget = nullptr;
-    class QPushButton* CloseButton = nullptr;
-    class QHBoxLayout* StretchLayout = nullptr;
-    class QHBoxLayout* TitleLayout = nullptr;
+    class QDockWidget* dockWidget = nullptr;
+    class QLabel* titleLabel = nullptr;
+    class QWidget* stretchWidget = nullptr;
+    class QPushButton* closeButton = nullptr;
+    class QHBoxLayout* stretchLayout = nullptr;
+    class QHBoxLayout* titleLayout = nullptr;
 
     void setupUI();
     void setupConnections();

@@ -106,122 +106,113 @@ QT_WARNING_POP
 #include <QtGui/QMouseEvent>
 #include "QSearchBar.h"
 
-QTitleBar::QTitleBar(QWidget* parent) : QWidget(parent)
+QTitleBar::QTitleBar(QWidget* parent)
+    : QWidget(parent),
+    isDragging(false)
 {
-    QVariant icon_data = parent->property("RageLogo");
-    if (icon_data.isValid()) RageIcon = icon_data.value<QIcon>();
+    auto loadIcon = [parent](const QString& propertyName) -> QIcon {
+        QVariant iconData = parent->property(propertyName.toUtf8());
+        return iconData.isValid() ? iconData.value<QIcon>() : QIcon();
+        };
 
-    QVariant icon_data1 = parent->property("MinusIcon");
-    if (icon_data1.isValid()) MinusIcon = icon_data1.value<QIcon>();
-
-    QVariant icon_data2 = parent->property("MaximIcon");
-    if (icon_data2.isValid()) MaximIcon = icon_data2.value<QIcon>();
-
-    QVariant icon_data3 = parent->property("MinimIcon");
-    if (icon_data3.isValid()) MinimIcon = icon_data3.value<QIcon>();
-
-    QVariant icon_data4 = parent->property("CloseIcon");
-    if (icon_data4.isValid()) CloseIcon = icon_data4.value<QIcon>();
+    rageIcon = loadIcon("RageLogo");
+    minusIcon = loadIcon("MinusIcon");
+    maximIcon = loadIcon("MaximIcon");
+    minimIcon = loadIcon("MinimIcon");
+    closeIcon = loadIcon("CloseIcon");
 
     setupUI();
+    setupConnections();
 }
 
 QTitleBar::~QTitleBar() = default;
 
 void QTitleBar::setupUI()
 {
-    TitleLayout = new QHBoxLayout(this);
-    TitleLayout->setSpacing(0);
-    TitleLayout->setObjectName("TitleLayout");
-    TitleLayout->setContentsMargins(0, 0, 0, 0);
+    titleLayout = new QHBoxLayout(this);
+    titleLayout->setSpacing(0);
+    titleLayout->setContentsMargins(0, 0, 0, 0);
 
-    RAGE_Logo = new QPushButton(this);
-    RAGE_Logo->setObjectName("RAGE_Logo");
-    RAGE_Logo->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-        "	border: none;\n"
-        "	margin-left: 5px;\n"
-        "}"));
-    RAGE_Logo->setIcon(RageIcon);
-    RAGE_Logo->setIconSize(QSize(20, 20));
+    rageButton = new QPushButton(this);
+    rageButton->setObjectName("rageButton");
+    rageButton->setIcon(rageIcon);
+    rageButton->setIconSize(QSize(20, 20));
 
-    HRSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-    SearchBar = new QSearchBar(this);
-    HRSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+    hrSpacer1 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+    searchBar = new QSearchBar(this);
+    hrSpacer2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
-    ControlContainer = new QWidget(this);
-    ControlContainer->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-        "   /*background-color: #FC7703;*/\n"
-        "   border: none;\n"
-        "   padding: 3px 7px;\n"
-        "}"));
-    ControlLayout = new QHBoxLayout(ControlContainer);
-    ControlLayout->setContentsMargins(0, 0, 0, 0);
-    ControlLayout->setSpacing(0);
+    controlContainer = new QWidget(this);
+    controlContainer->setObjectName("controlContainer");
+    controlLayout = new QHBoxLayout(controlContainer);
+    controlLayout->setContentsMargins(0, 0, 0, 0);
+    controlLayout->setSpacing(0);
 
-    MinimizeButton = new QPushButton(ControlContainer);
-    MinimizeButton->setIcon(MinusIcon);
-    MinimizeButton->setIconSize(QSize(28, 28));
+    minimizeButton = new QPushButton(controlContainer);
+    minimizeButton->setObjectName("minimizeButton");
+    minimizeButton->setIcon(minusIcon);
+    minimizeButton->setIconSize(QSize(28, 28));
 
-    MaximizeButton = new QPushButton(ControlContainer);
-    MaximizeButton->setIcon(MaximIcon);
-    MaximizeButton->setIconSize(QSize(28, 28));
+    maximizeButton = new QPushButton(controlContainer);
+    maximizeButton->setObjectName("maximizeButton");
+    maximizeButton->setIcon(maximIcon);
+    maximizeButton->setIconSize(QSize(28, 28));
 
-    CloseButton = new QPushButton(ControlContainer);
-    CloseButton->setIcon(CloseIcon);
-    CloseButton->setIconSize(QSize(28, 28));
-    CloseButton->setStyleSheet("QPushButton:hover { background-color: #EA3416; }");
+    closeButton = new QPushButton(controlContainer);
+    closeButton->setObjectName("closeButton");
+    closeButton->setIcon(closeIcon);
+    closeButton->setIconSize(QSize(28, 28));
 
-    ControlLayout->addWidget(MinimizeButton);
-    ControlLayout->addWidget(MaximizeButton);
-    ControlLayout->addWidget(CloseButton);
+    controlLayout->addWidget(minimizeButton);
+    controlLayout->addWidget(maximizeButton);
+    controlLayout->addWidget(closeButton);
 
-    TitleLayout->addWidget(RAGE_Logo);
-    TitleLayout->addItem(HRSpacer1);
-    TitleLayout->addWidget(SearchBar);
-    TitleLayout->addItem(HRSpacer2);
-    TitleLayout->addWidget(ControlContainer);
-
-    setupConnections();
+    titleLayout->addWidget(rageButton);
+    titleLayout->addItem(hrSpacer1);
+    titleLayout->addWidget(searchBar);
+    titleLayout->addItem(hrSpacer2);
+    titleLayout->addWidget(controlContainer);
 }
 
 void QTitleBar::setupConnections()
 {
-    connect(MinimizeButton, &QPushButton::clicked, this, [this] {
-        if (parentWidget() && parentWidget()->window())
-            parentWidget()->window()->showMinimized();
-    });
+    auto parentWindow = [this]() { return parentWidget() ? parentWidget()->window() : nullptr; };
 
-    connect(MaximizeButton, &QPushButton::clicked, this, [this] {
-        if (parentWidget() && parentWidget()->window()) {
-            if (parentWidget()->window()->isMaximized()) {
-                parentWidget()->window()->showNormal();
-                MaximizeButton->setIcon(MaximIcon);
+    connect(minimizeButton, &QPushButton::clicked, this, [parentWindow] {
+        if (auto window = parentWindow()) window->showMinimized();
+        });
+
+    connect(maximizeButton, &QPushButton::clicked, this, [this, parentWindow] {
+        if (auto window = parentWindow()) {
+            if (window->isMaximized()) {
+                window->showNormal();
+                maximizeButton->setIcon(maximIcon);
             }
-            else
-            {
-                parentWidget()->window()->showMaximized();
-                MaximizeButton->setIcon(MinimIcon);
+            else {
+                window->showMaximized();
+                maximizeButton->setIcon(minimIcon);
             }
         }
-    });
+        });
 
-    connect(CloseButton, &QPushButton::clicked, this, [this] {
-        if (parentWidget() && parentWidget()->window())
-            parentWidget()->window()->close();
-    });
+    connect(closeButton, &QPushButton::clicked, this, [parentWindow] {
+        if (auto window = parentWindow()) window->close();
+        });
 }
 
 void QTitleBar::mousePressEvent(QMouseEvent* event) {
     if (event->button() == Qt::LeftButton) {
         isDragging = true;
-        dragStartPosition = event->globalPosition().toPoint() - parentWidget()->frameGeometry().topLeft();
+        initialDragPosition = event->globalPosition().toPoint() - parentWidget()->frameGeometry().topLeft();
         event->accept();
     }
 }
 
 void QTitleBar::mouseMoveEvent(QMouseEvent* event) {
     if (isDragging && (event->buttons() & Qt::LeftButton)) {
-        parentWidget()->move(event->globalPosition().toPoint() - dragStartPosition);
+        if (auto parent = parentWidget()) {
+            parent->move(event->globalPosition().toPoint() - initialDragPosition);
+        }
         event->accept();
     }
 }

@@ -1,0 +1,49 @@
+QWidget {
+    background-color: #151515;
+    color: #D3D3D3;
+}
+
+/* Title Bar */
+QPushButton#rageButton {
+    border: none;
+    margin-left: 5px;
+}
+
+QPushButton#minimizeButton, 
+QPushButton#maximizeButton, 
+QPushButton#closeButton {
+    border: none;
+    padding: 3px 7px;
+}
+
+QPushButton#closeButton:hover {
+    background-color: #EA3416;
+}
+
+/* Search Bar */
+QPushButton#searchButton {
+    background-color: #2E2E2E;
+    color: #D3D3D3;
+    padding: 6px 10px;
+    border: 1px solid #3E3E3E;
+    border-radius: 5px;
+    margin: 1px 0px;
+}
+
+QLineEdit#searchLine {
+    background-color: #2E2E2E;
+    color: #D3D3D3;
+    padding: 6px 10px;
+    border: 1px solid #3E3E3E;
+    border-radius: 5px;
+}
+QLineEdit#searchLine:focus {
+    padding: 6px 10px;
+    border: 1px solid #FC7703;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+    outline: none;
+}

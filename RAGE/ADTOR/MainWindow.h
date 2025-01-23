@@ -15,8 +15,12 @@ protected:
     class Ui_RAGE* ui_Rage = nullptr;
     class Ui_ProjectSelector* ui_ProjectSelect = nullptr;
 
+    bool shouldSaveState = true;
+
     const char* app_name = "Rage";
     const char* setting_name = "windowSetting";
+
+    void setupUI();
 
     void saveWindow();
     void restoreWindow();

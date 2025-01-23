@@ -34,6 +34,9 @@ protected:
 
     bool eventFilter(QObject* watched, QEvent* event) override;
 
+protected:
+    QColor c_SearchBorder;
+
 private slots:
     void onButtonClicked();
 };

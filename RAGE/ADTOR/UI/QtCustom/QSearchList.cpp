@@ -104,25 +104,28 @@ QT_WARNING_POP
 #include <QtCore/QStringListModel>
 #include <QtCore/QPropertyAnimation>
 
-QSearchList::QSearchList(const QStringList& options, QObject* parent) : QCompleter(parent) 
+QSearchList::QSearchList(const QStringList& options, QObject* parent)
+    : QCompleter(parent),
+    searchOptions(options),
+    searchModel(new QStringListModel(options, this)),
+    searchListAnim(nullptr)
 {
-    SearchOptions = options;
-    SearchModel = new QStringListModel(options, this);
-    setModel(SearchModel);
+    setModel(searchModel);
     setCaseSensitivity(Qt::CaseInsensitive);
     setCompletionMode(QCompleter::PopupCompletion);
     setFilterMode(Qt::MatchContains);
 
     setupUI();
+    setupConnections();
 }
 
 QSearchList::~QSearchList() = default;
 
 void QSearchList::setupUI()
 {
-    QAbstractItemView* SearchPopup = popup();
-    SearchPopup->setObjectName("SearchPopup");
-    SearchPopup->setStyleSheet(R"(
+    QAbstractItemView* searchPopup = popup();
+    searchPopup->setObjectName("searchPopup");
+    searchPopup->setStyleSheet(R"(
         QAbstractItemView {
             color: #F0F0F0;
             background-color: #2E2E2E;
@@ -168,7 +171,11 @@ void QSearchList::setupUI()
         }
     )");
 
-    SearchListAnim = new QPropertyAnimation(this, "geometry");
-    SearchListAnim->setDuration(200);
-    SearchListAnim->setEasingCurve(QEasingCurve::OutQuad);
+    searchListAnim = new QPropertyAnimation(this, "geometry");
+    searchListAnim->setDuration(200);
+    searchListAnim->setEasingCurve(QEasingCurve::OutQuad);
+}
+
+void QSearchList::setupConnections()
+{
 }

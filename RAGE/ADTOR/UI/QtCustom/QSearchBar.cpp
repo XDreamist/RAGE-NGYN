@@ -138,69 +138,34 @@ QT_WARNING_POP
 #include "../../Utilities/Warning.h"
 
 QSearchBar::QSearchBar(QWidget* parent)
-    : QWidget(parent)
+    : QWidget(parent),
+    searchButton(new QPushButton("Editor", this)),
+    searchLine(new QLineEdit(this)),
+    searchList(new QSearchList({ "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help" }, this)),
+    sbLayout(new QVBoxLayout(this))
 {
     setupUI();
+    setupConnections();
 }
 
 QSearchBar::~QSearchBar() = default;
 
 void QSearchBar::setupUI()
 {
-    searchButton = new QPushButton("Editor", this);
     searchButton->setObjectName("searchButton");
-    QSizePolicy sizePolicy(QSizePolicy::Policy::MinimumExpanding, QSizePolicy::Policy::Preferred);
-    sizePolicy.setHorizontalStretch(0);
-    sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(searchButton->sizePolicy().hasHeightForWidth());
-    searchButton->setSizePolicy(sizePolicy);
-    searchButton->setStyleSheet(R"(
-        QPushButton {
-            background-color: #2E2E2E;
-            color: #D3D3D3;
-            padding: 6px 10px;
-            border: 1px solid #3E3E3E;
-            border-radius: 5px;
-            margin: 1px 0px;
-        }
-    )");
+    searchButton->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred));
     searchButton->setCursor(Qt::IBeamCursor);
 
-    searchLine = new QLineEdit(this);
-    searchLine->setObjectName("SearchBar");
+    searchLine->setObjectName("searchLine");
     searchLine->setPlaceholderText("Type to search...");
-    searchLine->setStyleSheet(R"(
-        QLineEdit {
-            background-color: #2E2E2E;
-            color: #D3D3D3;
-            padding: 6px 10px;
-            border: 1px solid #3E3E3E;
-            border-radius: 5px;
-        }
-        QLineEdit:focus {
-            padding: 6px 10px;
-            border: 1px solid #FC7703;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom: none;
-            outline: none;
-        }
-    )");
 
     ConfigManager& config = ConfigManager::getInstance();
     setSearchText(config.getValue("Project Name", searchText));
 
-    searchOptions = { "File", "Edit", "View", "Build", "Test", "Tools", "Window", "Help"};
-
-    searchList = new QSearchList(searchOptions, this);
     searchList->setMaxVisibleItems(maxVisibleItems);
-
     searchLine->setCompleter(searchList);
     searchPopup = searchList->popup();
 
-    sbLayout = new QVBoxLayout(this);
     sbLayout->setContentsMargins(0, 5, 0, 0);
     sbLayout->setSpacing(0);
     sbLayout->addWidget(searchButton);
@@ -208,14 +173,12 @@ void QSearchBar::setupUI()
 
     searchLine->installEventFilter(this);
     searchPopup->installEventFilter(this);
-
-    setupConnections();
 }
 
 void QSearchBar::setupConnections()
 {
     connect(searchButton, &QPushButton::clicked, this, &QSearchBar::onButtonClicked);
-    
+
     connect(searchList, QOverload<const QString&>::of(&QCompleter::highlighted),
         this, [this](const QString& text) {
             setSearchText(text);
@@ -260,7 +223,8 @@ void QSearchBar::activateSearch(bool activate)
     }
 }
 
-void QSearchBar::onButtonClicked() {
+void QSearchBar::onButtonClicked()
+{
     activateSearch(true);
 }
 

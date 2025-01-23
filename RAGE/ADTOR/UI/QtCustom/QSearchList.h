@@ -11,10 +11,11 @@ public:
     ~QSearchList();
 
 protected:
-    class QStringListModel* SearchModel = nullptr;
-    class QPropertyAnimation* SearchListAnim = nullptr;
+    class QStringListModel* searchModel = nullptr;
+    class QPropertyAnimation* searchListAnim = nullptr;
 
-    QStringList SearchOptions;
+    QStringList searchOptions;
 
     void setupUI();
+    void setupConnections();
 };

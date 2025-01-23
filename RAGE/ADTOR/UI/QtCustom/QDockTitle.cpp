@@ -106,19 +106,20 @@ QT_WARNING_POP
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QStyle>
 
-QDockTitle::QDockTitle(QDockWidget* dock, QWidget* parent) : DockWidget(dock), QWidget(parent)
+QDockTitle::QDockTitle(QDockWidget* dock, QWidget* parent)
+    : dockWidget(dock),
+    QWidget(parent)
 {
     setupUI();
-
-    dock->setTitleBarWidget(this);
+    setupConnections();
 }
 
 QDockTitle::~QDockTitle() = default;
 
 void QDockTitle::setupUI()
 {
-    TitleLabel = new QLabel("", this);
-    TitleLabel->setStyleSheet(QString::fromUtf8(
+    titleLabel = new QLabel("", this);
+    titleLabel->setStyleSheet(QString::fromUtf8(
         "   background-color: #222222;\n"
         "   color: #D3D3D3;\n"
         "   padding: 4px 8px;\n"
@@ -127,35 +128,33 @@ void QDockTitle::setupUI()
         "   border-bottom-left-radius: 0;\n"
         "   border-bottom-right-radius: 0;\n"));
 
-    StretchWidget = new QWidget(this);
-    StretchWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    StretchWidget->setStyleSheet("background: none; border-top-right-radius: 5px;");
+    stretchWidget = new QWidget(this);
+    stretchWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    stretchWidget->setStyleSheet("background: none; border-top-right-radius: 5px;");
 
-    CloseButton = new QPushButton(StretchWidget);
-    CloseButton->setIcon(style()->standardIcon(QStyle::SP_TitleBarCloseButton));
-    CloseButton->setFixedSize(9, 9);
-    CloseButton->setStyleSheet(QString::fromUtf8(
+    closeButton = new QPushButton(stretchWidget);
+    closeButton->setIcon(style()->standardIcon(QStyle::SP_TitleBarCloseButton));
+    closeButton->setFixedSize(9, 9);
+    closeButton->setStyleSheet(QString::fromUtf8(
         "   color: #D3D3D3;\n"
         "   border: none;\n"));
-    CloseButton->hide();
+    closeButton->hide();
 
-    StretchLayout = new QHBoxLayout(StretchWidget);
-    StretchLayout->addStretch();
-    StretchLayout->addWidget(CloseButton);
+    stretchLayout = new QHBoxLayout(stretchWidget);
+    stretchLayout->addStretch();
+    stretchLayout->addWidget(closeButton);
 
-    TitleLayout = new QHBoxLayout(this);
-    TitleLayout->setContentsMargins(0, 0, 0, 0);
-    TitleLayout->setSpacing(0);
-    TitleLayout->addWidget(TitleLabel);
-    TitleLayout->addWidget(StretchWidget);
-
-    setupConnections();
+    titleLayout = new QHBoxLayout(this);
+    titleLayout->setContentsMargins(0, 0, 0, 0);
+    titleLayout->setSpacing(0);
+    titleLayout->addWidget(titleLabel);
+    titleLayout->addWidget(stretchWidget);
 }
 
 void QDockTitle::expandTitle(bool expand)
 {
     if (expand) {
-        TitleLabel->setStyleSheet(QString::fromUtf8(
+        titleLabel->setStyleSheet(QString::fromUtf8(
             "   background-color: #222222;\n"
             "   color: #D3D3D3;\n"
             "   padding: 4px 8px;\n"
@@ -163,11 +162,11 @@ void QDockTitle::expandTitle(bool expand)
             "   border-top-right-radius: 0px;\n"
             "   border-bottom-left-radius: 0;\n"
             "   border-bottom-right-radius: 0;\n"));
-        StretchWidget->setStyleSheet("background: #222222; border-top-right-radius: 5px;");
-        CloseButton->show();
+        stretchWidget->setStyleSheet("background: #222222; border-top-right-radius: 5px;");
+        closeButton->show();
     }
     else {
-        TitleLabel->setStyleSheet(QString::fromUtf8(
+        titleLabel->setStyleSheet(QString::fromUtf8(
             "   background-color: #222222;\n"
             "   color: #D3D3D3;\n"
             "   padding: 4px 8px;\n"
@@ -175,14 +174,14 @@ void QDockTitle::expandTitle(bool expand)
             "   border-top-right-radius: 5px;\n"
             "   border-bottom-left-radius: 0;\n"
             "   border-bottom-right-radius: 0;\n"));
-        StretchWidget->setStyleSheet("background: none; border-top-right-radius: 5px;");
-        CloseButton->hide();
+        stretchWidget->setStyleSheet("background: none; border-top-right-radius: 5px;");
+        closeButton->hide();
     }
 }
 
 void QDockTitle::setupConnections()
 {
-    connect(DockWidget, &QDockWidget::windowTitleChanged, TitleLabel, &QLabel::setText);
+    connect(dockWidget, &QDockWidget::windowTitleChanged, titleLabel, &QLabel::setText);
 
-    connect(CloseButton, &QPushButton::clicked, DockWidget, &QDockWidget::close);
+    connect(closeButton, &QPushButton::clicked, dockWidget, &QDockWidget::close);
 }
