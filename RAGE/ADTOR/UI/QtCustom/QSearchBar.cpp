@@ -160,11 +160,12 @@ void QSearchBar::setupUI()
     searchLine->setPlaceholderText("Type to search...");
 
     ConfigManager& config = ConfigManager::getInstance();
-    setSearchText(config.getValue("Project Name", searchText));
+    setSearchText(config.getValue("ProjectName", searchText));
 
     searchList->setMaxVisibleItems(maxVisibleItems);
     searchLine->setCompleter(searchList);
     searchPopup = searchList->popup();
+
 
     sbLayout->setContentsMargins(0, 5, 0, 0);
     sbLayout->setSpacing(0);
@@ -230,8 +231,6 @@ void QSearchBar::onButtonClicked()
 
 bool QSearchBar::eventFilter(QObject* object, QEvent* event)
 {
-    qDebug() << object << " : " << event->type();
-
     if (object == searchLine && event->type() == QEvent::MetaCall) {
         activateSearch(false);
     }

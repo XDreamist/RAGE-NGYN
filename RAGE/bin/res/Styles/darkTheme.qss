@@ -1,27 +1,116 @@
+QDockTitle > QLabel {
+    background-color: #222222;
+    color: #D3D3D3;
+    padding: 4px 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+QDockTitle > #stretchWidget {
+    background: none;
+    border-top-right-radius: 5px;
+}
+
+QDockTitle > QPushButton {
+    color: #D3D3D3;
+    border: none;
+}
+
+QDockWindow {
+    background-color: #222222;
+    border: 6px solid transparent;
+}
+QDockWindow > QWidget {
+    background-color: #151515;
+    border: 10px solid #222222;
+    border-radius: 8px;
+    border-top-left-radius: 0px;
+}
+
 QWidget {
     background-color: #151515;
     color: #D3D3D3;
 }
 
+QPushButton {
+    color: #D3D3D3;
+    border: none;
+    border-radius: 2px;
+}
+
+QAbstractItemView {
+   color: #D3D3D3;
+   background-color: #2E2E2E;
+   border: 1px solid #3E3E3E;
+}
+QAbstractItemView::item {
+   padding: 4px 8px;
+}
+QAbstractItemView::item:hover {
+   background-color: #222222;
+   /*padding: 4px 8px;*/
+}
+QAbstractItemView::item:selected {
+   background-color: #000000;
+   padding: 4px 8px;
+}
+
+QScrollBar:vertical,
+QScrollBar:horizontal {
+   border: none;
+   background-color: #333333;
+   width: 4px;
+   margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {
+   background-color: #555555;
+   min-height: 10px;
+   border-radius: 2px;
+}
+QScrollBar::handle:vertical:hover,
+QScrollBar::handle:horizontal:hover {
+   background-color: #777777;
+}
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:horizontal,
+QScrollBar::add-line:horizontal {
+   border: none;
+   background: none;
+   height: 0px;
+}
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+   background: none;
+}
+
 /* Title Bar */
-QPushButton#rageButton {
+#rageButton {
     border: none;
     margin-left: 5px;
 }
 
-QPushButton#minimizeButton, 
-QPushButton#maximizeButton, 
-QPushButton#closeButton {
+#controlContainer > QPushButton {
     border: none;
     padding: 3px 7px;
+    border-radius: none;
+}
+#minimizeButton:hover,
+#maximizeButton:hover {
+    background-color: #3E3E3E;
 }
 
-QPushButton#closeButton:hover {
+#closeButton:hover {
     background-color: #EA3416;
 }
 
 /* Search Bar */
-QPushButton#searchButton {
+#searchButton {
     background-color: #2E2E2E;
     color: #D3D3D3;
     padding: 6px 10px;
@@ -30,14 +119,14 @@ QPushButton#searchButton {
     margin: 1px 0px;
 }
 
-QLineEdit#searchLine {
+#searchLine {
     background-color: #2E2E2E;
     color: #D3D3D3;
     padding: 6px 10px;
     border: 1px solid #3E3E3E;
     border-radius: 5px;
 }
-QLineEdit#searchLine:focus {
+#searchLine:focus {
     padding: 6px 10px;
     border: 1px solid #FC7703;
     border-top-left-radius: 5px;
@@ -46,4 +135,59 @@ QLineEdit#searchLine:focus {
     border-bottom-right-radius: 0;
     border-bottom: none;
     outline: none;
+}
+
+/*#searchPopup > QAbstractItemView {
+    color: #F0F0F0;
+    background-color: #2E2E2E;
+    border: 1px solid #FC7703;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: 1px solid #151515;
+}
+#searchPopup > QAbstractItemView::item {
+    padding: 4px 14px;
+}
+#searchPopup > QAbstractItemView::item:hover {
+    background-color: #222222;
+    padding: 4px 8px;
+}
+#searchPopup > QAbstractItemView::item:selected {
+    background-color: #000000;
+    padding: 4px 8px;
+}
+
+#searchPopup > QScrollBar:vertical {
+    border: none;
+    background-color: #333333;
+    width: 4px;
+    margin: 0px 0px 0px 0px;
+}
+#searchPopup > QScrollBar::handle:vertical {
+    background-color: #555555;
+    min-height: 10px;
+    border-radius: 2px;
+}
+#searchPopup > QScrollBar::handle:vertical:hover {
+    background-color: #777777;
+}
+#searchPopup > QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+#searchPopup > QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}*/
+
+/* Other */
+#addObjButton {
+    background-color: #2E2E2E;
+    padding: 4px 0;
+}
+
+#addObjButton:hover {
+    background-color: #222222;
 }

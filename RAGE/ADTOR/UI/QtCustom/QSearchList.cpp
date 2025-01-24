@@ -127,7 +127,7 @@ void QSearchList::setupUI()
     searchPopup->setObjectName("searchPopup");
     searchPopup->setStyleSheet(R"(
         QAbstractItemView {
-            color: #F0F0F0;
+            color: #D3D3D3;
             background-color: #2E2E2E;
             border: 1px solid #FC7703;
             border-top-left-radius: 0;

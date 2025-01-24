@@ -118,26 +118,15 @@ QDockTitle::~QDockTitle() = default;
 
 void QDockTitle::setupUI()
 {
-    titleLabel = new QLabel("", this);
-    titleLabel->setStyleSheet(QString::fromUtf8(
-        "   background-color: #222222;\n"
-        "   color: #D3D3D3;\n"
-        "   padding: 4px 8px;\n"
-        "   border-top-left-radius: 5px;\n"
-        "   border-top-right-radius: 5px;\n"
-        "   border-bottom-left-radius: 0;\n"
-        "   border-bottom-right-radius: 0;\n"));
+    titleLabel = new QLabel(this);
 
     stretchWidget = new QWidget(this);
+    stretchWidget->setObjectName("stretchWidget");
     stretchWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    stretchWidget->setStyleSheet("background: none; border-top-right-radius: 5px;");
 
     closeButton = new QPushButton(stretchWidget);
     closeButton->setIcon(style()->standardIcon(QStyle::SP_TitleBarCloseButton));
     closeButton->setFixedSize(9, 9);
-    closeButton->setStyleSheet(QString::fromUtf8(
-        "   color: #D3D3D3;\n"
-        "   border: none;\n"));
     closeButton->hide();
 
     stretchLayout = new QHBoxLayout(stretchWidget);

@@ -157,18 +157,6 @@ QDockWindow::~QDockWindow() {
 
 void QDockWindow::setupUI()
 {
-    this->setStyleSheet(QString::fromUtf8(
-        "QDockWidget {\n"
-        "   background-color: #222222;\n"
-        "   border: 6px solid transparent;\n"
-        "}\n"
-        "QDockWidget > QWidget {\n"
-        "   background-color: #151515;\n"
-        "   border: 10px solid #222222;\n"
-        "   border-radius: 8px;\n"
-        "   border-top-left-radius: 0px;\n"
-        "}"));
-
     dockTitle = new QDockTitle(this);
     setTitleBarWidget(dockTitle);
 

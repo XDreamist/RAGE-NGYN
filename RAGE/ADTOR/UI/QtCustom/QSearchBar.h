@@ -32,7 +32,7 @@ protected:
     void activateSearch(bool activate);
     void setSearchText(const QString& text = "");
 
-    bool eventFilter(QObject* watched, QEvent* event) override;
+    bool eventFilter(QObject* object, QEvent* event) override;
 
 protected:
     QColor c_SearchBorder;
