@@ -19,8 +19,11 @@ protected:
 
     const char* app_name = "Rage";
     const char* setting_name = "windowSetting";
+    const char* theme_path = "res/Styles/darkTheme.qss";
 
     void setupUI();
+    void setupConnections();
+    void setupTheme();
 
     void saveWindow();
     void restoreWindow();

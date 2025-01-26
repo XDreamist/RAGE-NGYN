@@ -231,6 +231,8 @@ void QSearchBar::onButtonClicked()
 
 bool QSearchBar::eventFilter(QObject* object, QEvent* event)
 {
+    qDebug() << object << ": " << event->type();
+
     if (object == searchLine && event->type() == QEvent::MetaCall) {
         activateSearch(false);
     }

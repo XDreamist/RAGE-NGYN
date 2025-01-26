@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClInclude Include="Common\Command.h" />
     <ClInclude Include="Common\Block.h" />
+    <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\Entity.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Managers\ConfigManager.h" />

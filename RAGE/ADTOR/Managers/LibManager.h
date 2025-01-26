@@ -23,9 +23,16 @@ public:
         }
     }
 
-    int callSomeFunction(int param) {
-        if (someFunction) {
-            return someFunction(param);
+    int createEntity(class EntityDescriptor* descriptor) {
+        if (func_createEntity) {
+            return func_createEntity(descriptor);
+        }
+        throw std::runtime_error("Function not loaded");
+    }
+
+    int removeEntity(int index) {
+        if (func_removeEntity) {
+            return func_removeEntity(index);
         }
         throw std::runtime_error("Function not loaded");
     }
@@ -34,13 +41,17 @@ private:
     QLibrary library;
 
     // Function pointers
-    typedef int (*SomeFunctionType)(int);
-    SomeFunctionType someFunction = nullptr;
+    typedef int (*createEntityType)(class EntityDescriptor*);
+    createEntityType func_createEntity = nullptr;
+
+    typedef int (*removeEntityType)(int);
+    removeEntityType func_removeEntity = nullptr;
 
     bool initFunctions() {
-        someFunction = reinterpret_cast<SomeFunctionType>(library.resolve("SomeFunction"));
-        if (!someFunction) {
-            qDebug() << "Failed to resolve SomeFunction";
+        func_createEntity = reinterpret_cast<createEntityType>(library.resolve("createEntity"));
+        func_removeEntity = reinterpret_cast<removeEntityType>(library.resolve("removeEntity"));
+        if (!func_createEntity && func_removeEntity) {
+            qDebug() << "Failed to resolve some functions";
             return false;
         }
         return true;

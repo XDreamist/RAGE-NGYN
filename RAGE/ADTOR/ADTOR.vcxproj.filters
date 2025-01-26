@@ -34,6 +34,7 @@
     <ClInclude Include="Utilities\Warning.h" />
     <ClInclude Include="UI\Editor.h" />
     <ClInclude Include="UI\QtCustom\QRenderer.h" />
+    <ClInclude Include="Components\Component.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="UI\update_ui.bat">

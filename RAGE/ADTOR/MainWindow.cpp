@@ -118,6 +118,8 @@ MainWindow::MainWindow(QWidget* parent, bool open_rage) : QMainWindow(parent), o
     //this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
     setupUI();
+    setupConnections();
+    setupTheme();
 }
 
 MainWindow::~MainWindow()
@@ -135,10 +137,10 @@ void MainWindow::setupUI()
         ui_Rage->setupUi(this);
 
         LibManager facade("BRIDGE.dll");
-        if (facade.load()) std::cout << "Yeay";
+        if (facade.load()) std::cout << "The dll is loaded successfully!\n";
         try {
-            int result = facade.callSomeFunction(42);
-            qDebug() << "Function result:" << result;
+            //int result = facade.createEntity(42);
+            qDebug() << "Function result:";// << result;
         }
         catch (const std::runtime_error& e) {
             qDebug() << "Error:" << e.what();
@@ -157,6 +159,23 @@ void MainWindow::setupUI()
     else {
         ui_ProjectSelect = new Ui_ProjectSelector;
         ui_ProjectSelect->setupUi(this);
+    }
+}
+
+void MainWindow::setupConnections()
+{
+}
+
+void MainWindow::setupTheme()
+{
+    QFile file(theme_path);
+    if (file.open(QFile::ReadOnly | QFile::Text)) {
+        QString styleSheet = QLatin1String(file.readAll());
+        this->setStyleSheet(styleSheet);
+        file.close();
+    }
+    else {
+        qDebug() << "Failed to load stylesheet from : " << theme_path << "\n";
     }
 }
 
