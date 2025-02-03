@@ -3,6 +3,19 @@
 #include <QtCore/QLibrary>
 #include <QtCore/QString>
 #include <iostream>
+#include <vector>
+
+struct TransformComponent
+{
+    std::vector<float> Position = std::vector<float>(3, 0.0f);
+    std::vector<float> Rotation = std::vector<float>(4, 0.0f);
+    std::vector<float> Scale = std::vector<float>(3, 1.0f);
+};
+
+struct EntityDescriptor
+{
+    TransformComponent transform;
+};
 
 class LibManager {
 public:
@@ -23,9 +36,11 @@ public:
         }
     }
 
-    int createEntity(class EntityDescriptor* descriptor) {
+    int createEntity() {
         if (func_createEntity) {
-            return func_createEntity(descriptor);
+            EntityDescriptor* desc = new EntityDescriptor;
+
+            return func_createEntity(desc);
         }
         throw std::runtime_error("Function not loaded");
     }
@@ -41,7 +56,7 @@ private:
     QLibrary library;
 
     // Function pointers
-    typedef int (*createEntityType)(class EntityDescriptor*);
+    typedef int (*createEntityType)(EntityDescriptor*);
     createEntityType func_createEntity = nullptr;
 
     typedef int (*removeEntityType)(int);

@@ -6,6 +6,7 @@
 #include "Id.h"
 #include "..\NGYN\Components\Ntt.h"
 #include "..\NGYN\Components\Transform.h"
+#include <iostream>
 
 using namespace RAGE;
 
@@ -38,12 +39,13 @@ namespace
 	{
 		TransformComponent transform;
 	};
+
+	Core::Entity getEntityFromID(ID::IdType id)
+	{
+		return Core::Entity{ Core::EntityID{id} };
+	}
 }
 
-Core::Entity getEntityFromID(ID::IdType id)
-{
-	return Core::Entity{ Core::EntityID{id} };
-}
 
 EDITOR_INTERFACE
 ID::IdType createEntity(EntityDescriptor* entity_descriptor)
@@ -56,6 +58,8 @@ ID::IdType createEntity(EntityDescriptor* entity_descriptor)
 	{
 		&transform_info,
 	};
+
+	std::cout << "DLL: " << descriptor.transform.Position[0] << "\n";
 
 	return Core::createEntity(enitity_info).getID();
 }

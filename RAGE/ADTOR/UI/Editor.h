@@ -166,6 +166,7 @@ public:
         hierarchyDockContent = new QWidget();
         hierarchyDockContent->setObjectName("hierarchyDockContent");
         gridLayout_2 = new QGridLayout(hierarchyDockContent);
+        gridLayout_2->setSpacing(0);
         gridLayout_2->setObjectName("gridLayout_2");
         listWidget = new QListWidget(hierarchyDockContent);
         listWidget->setObjectName("listWidget");

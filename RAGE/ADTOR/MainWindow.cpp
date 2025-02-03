@@ -139,8 +139,8 @@ void MainWindow::setupUI()
         LibManager facade("BRIDGE.dll");
         if (facade.load()) std::cout << "The dll is loaded successfully!\n";
         try {
-            //int result = facade.createEntity(42);
-            qDebug() << "Function result:";// << result;
+            int result = facade.createEntity();
+            qDebug() << "Created entity's id:" << result;
         }
         catch (const std::runtime_error& e) {
             qDebug() << "Error:" << e.what();

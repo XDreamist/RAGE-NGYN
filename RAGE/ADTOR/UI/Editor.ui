@@ -351,6 +351,9 @@
    </attribute>
    <widget class="QWidget" name="hierarchyDockContent">
     <layout class="QGridLayout" name="gridLayout_2">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item row="1" column="0">
       <widget class="QListWidget" name="listWidget"/>
      </item>
