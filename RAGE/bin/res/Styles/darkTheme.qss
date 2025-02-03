@@ -183,6 +183,12 @@ QScrollBar::sub-page:horizontal {
 }*/
 
 /* Other */
+#detailsDockContent > QWidget {
+   color: #D3D3D3;
+   background-color: #2E2E2E;
+   border: 1px solid #3E3E3E;
+}
+
 #addObjButton {
     background-color: #2E2E2E;
     padding: 4px 0;

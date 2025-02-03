@@ -47,6 +47,10 @@ public:
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
     QPushButton *addObjButton;
+    QDockWindow *detailsDock;
+    QWidget *detailsDockContent;
+    QGridLayout *gridLayout_3;
+    QWidget *widget_2;
 
     void setupUi(QMainWindow *RAGE)
     {
@@ -188,6 +192,19 @@ public:
 
         hierarchyDock->setWidget(hierarchyDockContent);
         RAGE->addDockWidget(Qt::DockWidgetArea::TopDockWidgetArea, hierarchyDock);
+        detailsDock = new QDockWindow(RAGE);
+        detailsDock->setObjectName("detailsDock");
+        detailsDockContent = new QWidget();
+        detailsDockContent->setObjectName("detailsDockContent");
+        gridLayout_3 = new QGridLayout(detailsDockContent);
+        gridLayout_3->setObjectName("gridLayout_3");
+        widget_2 = new QWidget(detailsDockContent);
+        widget_2->setObjectName("widget_2");
+
+        gridLayout_3->addWidget(widget_2, 0, 0, 1, 1);
+
+        detailsDock->setWidget(detailsDockContent);
+        RAGE->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, detailsDock);
 
         retranslateUi(RAGE);
 
@@ -201,6 +218,7 @@ public:
         rendererDock->setWindowTitle(QCoreApplication::translate("RAGE", "Viewport", nullptr));
         hierarchyDock->setWindowTitle(QCoreApplication::translate("RAGE", "Content Viewer", nullptr));
         addObjButton->setText(QCoreApplication::translate("RAGE", "Add", nullptr));
+        detailsDock->setWindowTitle(QCoreApplication::translate("RAGE", "Details Viewer", nullptr));
     } // retranslateUi
 
 };
