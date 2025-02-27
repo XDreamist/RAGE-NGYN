@@ -59,7 +59,7 @@ ID::IdType createEntity(EntityDescriptor* entity_descriptor)
 		&transform_info,
 	};
 
-	std::cout << "DLL: " << descriptor.transform.Position[0] << "\n";
+	std::cout << "DLL: " << entity_descriptor->transform.Position[0] << "\n";
 
 	return Core::createEntity(enitity_info).getID();
 }

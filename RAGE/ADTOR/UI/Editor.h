@@ -174,6 +174,8 @@ public:
         gridLayout_2->setObjectName("gridLayout_2");
         listWidget = new QListWidget(hierarchyDockContent);
         listWidget->setObjectName("listWidget");
+        listWidget->setDragEnabled(true);
+        listWidget->setProperty("isWrapping", QVariant(true));
 
         gridLayout_2->addWidget(listWidget, 1, 0, 1, 1);
 

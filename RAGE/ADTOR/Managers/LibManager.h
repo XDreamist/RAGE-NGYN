@@ -7,13 +7,14 @@
 
 struct TransformComponent
 {
-    std::vector<float> Position = std::vector<float>(3, 0.0f);
-    std::vector<float> Rotation = std::vector<float>(4, 0.0f);
-    std::vector<float> Scale = std::vector<float>(3, 1.0f);
+    float Position[3] = { 0.0f, 0.0f, 0.0f };
+    float Rotation[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    float Scale[3] = { 0.0f, 0.0f, 0.0f };
 };
 
 struct EntityDescriptor
 {
+    int id;
     TransformComponent transform;
 };
 
@@ -37,29 +38,46 @@ public:
     }
 
     int createEntity() {
-        if (func_createEntity) {
-            EntityDescriptor* desc = new EntityDescriptor;
+        if (!func_createEntity) throw std::runtime_error("Function not loaded");
 
-            return func_createEntity(desc);
+        EntityDescriptor* desc = new EntityDescriptor;
+        int index = func_createEntity(desc);
+        if (index >= 0) {
+            desc->id = index;
+            descriptorsList.append(desc);
+            emit entityCreated(index);
+
+            return index;
         }
-        throw std::runtime_error("Function not loaded");
+        return -1;
     }
 
-    int removeEntity(int index) {
-        if (func_removeEntity) {
-            return func_removeEntity(index);
-        }
-        throw std::runtime_error("Function not loaded");
+    bool removeEntity(int index) {
+        if (!func_removeEntity) throw std::runtime_error("Function not loaded");
+
+        if (index < 0)  throw std::runtime_error("Invalid id tried to remove");
+
+        func_removeEntity(index);
+        descriptorsList.remove(index);
+        emit entityRemoved(index);
+
+        return true;
     }
+
+signals:
+    void entityCreated(int id);
+    void entityRemoved(int id);
 
 private:
     QLibrary library;
+
+    QVector<EntityDescriptor*> descriptorsList;
 
     // Function pointers
     typedef int (*createEntityType)(EntityDescriptor*);
     createEntityType func_createEntity = nullptr;
 
-    typedef int (*removeEntityType)(int);
+    typedef void (*removeEntityType)(int);
     removeEntityType func_removeEntity = nullptr;
 
     bool initFunctions() {
